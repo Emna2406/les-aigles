@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div  style="display: flex;align-items: center;justify-content: center; margin-top: 80px; ">
+<a href="{{path('addconsultation')}}"><i class="ri-arrow-left-circle" style="font-size: 25px"></i></a>
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Modifier Ordonnance</h6>
+                            
+                            {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
+
+
+                             <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">id consultation</label>
+                                    <div class="col-sm-10">
+                                       {{form_widget(f.consultation,{'attr':{'class':'form-control'}}) }}
+                                      
+                                       
+                                    </div>
+                                </div>
+
+
+                               
+                                
+
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">date de Ordonnance</label>
+                                    <div class="col-sm-10">
+                                       {{form_widget(f.date,{'attr':{'class':'form-control'}}) }}
+                                       {{form_errors(f.date,{'attr':{'class':'text-danger'}}) }}
+                                       
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Description</label>
+                                    <div class="col-sm-10">
+                                       {{form_widget(f.description,{'attr':{'class':'form-control'}}) }}
+                                       {{form_errors(f.description,{'attr':{'class':'text-danger'}}) }}
+                                       
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row ">
+                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Image</label>
+                                    <div class="col-sm-15">
+                                       {{form_widget(f.image,{'attr':{'class':'form-control'}}) }}
+                                       {{form_errors(f.image,{'attr':{'class':'text-danger'}}) }}
+                                       
+                                    </div>
+                                </div>
+
+                     
+           
+
+<br/>
+<br/>
+
+                                <div class="col-sn-10">
+                               
+                                  {{form_widget(f.ajouter,{'attr':{'class':'btn btn-primary'}}) }}
+                                </div>
+                        
+
+
+
+                              {{form_end(f)}}
+                               
+                                
+                                
+                         
+                        </div>
+                    </div>
+
+{% endblock %}

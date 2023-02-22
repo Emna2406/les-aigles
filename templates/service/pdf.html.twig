@@ -1,0 +1,35 @@
+
+{% block body %}
+ <h1 align = "centre" > Liste des Services </h1>
+
+                    <table  border="1">
+                        <thead>
+                        <tr>
+                            <td>Id </td>
+                            <td>Nom </td>
+                            <td>Description</td>
+                            <td>image</td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for service in listpdf %}
+                            <tr>
+                                <td> {{ service.id }}</td>
+                                <td> {{ service.nom }}</td>
+                                <td> {{ service.description }}</td>
+
+                                <td>
+                                    <img src="{{ asset('assets/'~service.image) }}" height="220" width="220">
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+
+
+
+
+
+                        </tbody>
+
+{% endblock %}

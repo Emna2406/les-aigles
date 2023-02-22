@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div  style="display: flex;align-items: center;justify-content: center; margin-top: 80px; ">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Modifier Consultation</h6>
+                            
+                            {{ form_start(f) }}
+
+
+                              
+                            <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Medecin</label>
+                                    <div class="col-sm-10">
+                                       {{form_widget(f.medecin,{'attr':{'class':'form-control'}}) }}
+                                       
+                                    </div>
+                                </div>
+
+
+                                 <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Patient</label>
+                                    <div class="col-sm-10">
+                                       {{form_widget(f.patient,{'attr':{'class':'form-control'}}) }}
+                                     
+                                    </div>
+                                
+
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">date de consultation</label>
+                                    <div class="col-sm-10">
+                                       {{form_widget(f.datedeconsultation,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Image</label>
+                                    <div class="col-sm-10">
+                                       {{form_widget(f.image,{'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+
+<br/>
+<br/>
+
+                                <div class="col-sn-10">
+                               
+                                  {{form_widget(f.ajouter,{'attr':{'class':'btn btn-primary'}}) }}
+                                </div>
+                        
+
+
+
+                              {{form_end(f)}}
+                               
+                                
+                                
+                         
+                        </div>
+                    </div>
+
+{% endblock %}

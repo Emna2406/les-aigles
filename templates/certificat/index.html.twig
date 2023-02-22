@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+</br>
+</br>
+</br>
+ 
+<div class="row">
+
+                        <div class="bg-light rounded h-100 p-4">
+                        <div class="card-body">
+                   
+                            <h6 class="mb-4">Les Certificats</h6>
+                           
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                             
+                                             <th>nom de patient </th>
+                                        <th>nom de medecin </th>
+                                          
+                                            <th>debut de repos </th>
+                                            
+                                            <th>fin de repos</th>
+                                            <th>Supprimer</th>
+                                             <th>Modifer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for ce in c %}
+   <tr>
+
+   <td> 
+   <img src="{{ asset('assets/'~ce.image) }}" height="260" width="260">
+   </td>
+
+
+  <td>{{ce.patient.nom}}</td>
+  <td>{{ce.medecin.nom}}</td>
+   <td>{{ce.Datedeb|date}} </td>
+     <td>{{ce.datefin|date}} </td>
+    
+   
+   
+
+   <td>
+    <a class="btn btn-warning" href="{{ path('supp_certificat',{'id':ce.id}) }}">Supprimer </a>
+    </td>
+   <td>
+    <a class="btn btn-danger" href="{{ path('modifCertificat',{'id':ce.id}) }}">Modifier </a>
+    </td>
+   </tr>
+   {%endfor%}
+                                </tbody>
+                                
+                            </table>
+                            
+     
+                        </div>
+                       
+                    </div>
+                    </div>
+                    <a class="btn btn-outline-info" href="{{path('addcertificat')}}">Retour Ajouter </a>
+                    </div>
+                     
+                    </div>
+                    </div>
+
+
+</div>
+
+{% endblock %}

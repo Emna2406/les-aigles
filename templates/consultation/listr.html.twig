@@ -1,0 +1,58 @@
+
+
+
+
+{% block body %}
+
+
+    <div> <img src="{{ asset('assets/logo.gif') }}" height="150" width="170" /></div>
+
+
+                {# bech taml btn w path thezk page okhra  #}
+                <h4>Liste des Reglements</h4>
+
+
+            <div class="card-body">
+                <div class="table-responsive" >
+                    <table class="table"    >
+                        <thead>
+                        <tr>
+                            <th> Image</th>
+                            <th>Nom de mdecin</th>
+                            <th>Nom de Patient</th>
+                            <th> date de consultation</th>
+                            
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for reglement in a %}
+                            <tr>
+                            <td>{{ reglement.image}}</td>
+                             <td>{{ reglement.medecin.nom}}</td>
+                             <td>{{ reglement.patient.nom}}</td>
+                             <td>{{ reglement.datedeconsultation|date}}</td>       
+                                
+                               
+
+
+
+                            </tr>
+
+
+
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+    <h4>Signature</h4>
+
+
+{% endblock %}
