@@ -1,0 +1,37 @@
+  <h1 ALIGN="center">Liste des certificat</h1><br>
+<table border="1" >
+
+    <thead>
+    <tr>
+       
+        <th>     nom patient     </th>
+
+          <th>   nom medecin   </th>
+ 
+                 
+                           <th>     date debut     </th>
+                      <th> Date fin           </th>
+                       
+                 
+
+    </tr>
+    </thead>
+    <tbody>
+   {% for ce in listpdf %}
+   <tr>
+ 
+   
+
+
+  <td>{{ce.patient.nom}}</td>
+  <td>{{ce.medecin.nom}}</td>
+   <td>{{ce.Datedeb|date}} </td>
+     <td>{{ce.datefin|date}} </td>
+     
+       
+       
+
+    </tr >
+   {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row" style="display: flex;align-items: center;justify-content: center;">
+
+        <div class="col-lg-6">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h6 class="card-title">Liste Chambres</h6>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+
+
+                            <td>Nom de chambre </td>
+                            <td>Nom de Service </td>
+                            <td> Capacite</td>
+                            <td>prix</td>
+                            <td>etat</td>
+                            <td>Modifier</td>
+                            <td>Supprimer</td>
+
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for chambre in c %}
+                            <tr>
+                                <td> {{ chambre.num }}</td>
+                                <td>{{ chambre.service.nom}}</td>
+
+                                <td> {{ chambre.capacite }}</td>
+                                <td> {{ chambre.prix }}</td>
+                                <td> {{ chambre.etat }}</td>
+
+                                <td>
+                                    <a  class="btn btn-sm btn-primary" href="{{ path('modifChambre',{'id':chambre.id}) }}"> Modifier</a>
+                                     
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" href="{{ path('supp_chambre',{'id':chambre.id}) }}"> Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+             <a class="btn btn-outline-info" href="{{path('addChambre')}}">Retour Ajouter </a>
+        </div>
+    </div>
+{% endblock %}

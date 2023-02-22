@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+</br>
+</br>
+</br>
+  
+<div class="row">
+
+                        <div class="bg-light rounded h-100 p-4">
+                        <div class="card-body">
+                   
+                            <h6 class="mb-4">Les Consultations</h6>
+                           
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                            
+                                           
+                            <th>Nom de medecin</th>
+                            <th>Nom de Patient</th>
+                            <th> date de consultation</th>
+                                            
+                                            <th>Supprimer</th>
+                                             <th>Modifer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for ce in c%}
+   <tr>
+
+  
+   
+    
+                             <td>{{ ce.medecin.nom}}</td>
+                             <td>{{ ce.patient.nom}}</td>
+                             <td>{{ ce.datedeconsultation|date}}</td>  
+   
+   
+
+   <td>
+    <a class="btn btn-sm btn-primary" href="{{ path('supp_consultation',{'id':ce.id}) }}">Supprimer </a>
+    </td>
+   <td>
+    <a class="btn btn-sm btn-primary" href="{{ path('modifConsultation',{'id':ce.id}) }}">Modifier </a>
+    </td>
+   </tr>
+   {%endfor%}
+                                </tbody>
+                                
+                            </table>
+                            		</div>
+			
+     
+                        </div>
+                       
+                    </div>
+                    </div>
+                    </div>
+                     
+                    </div>
+                    </div>
+
+
+</div>
+{% endblock %}

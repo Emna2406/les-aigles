@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row" style="display: flex;align-items: center;justify-content: center;">
+
+        <div class="col-lg-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ path('addService') }}"><i class="ri-arrow-left-circle-fill" style="font-size: 50px;"></i></a>
+                    <h6 class="card-title">Liste Services</h6>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td>Id </td>
+                            <td>Nom </td>
+                            <td>Description</td>
+                            <td>image</td>
+                            <td>Modifier</td>
+                            <td>Supprimer</td>
+
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for service in s %}
+                            <tr>
+                                <td> {{ service.id }}</td>
+                                <td> {{ service.nom }}</td>
+                                <td> {{ service.description }}</td>
+
+                                <td>
+                                    <img src="{{ asset('assets/'~service.image) }}" height="220" width="220">
+                                </td>
+                                <td>
+                                    <a  class="btn btn-sm btn-primary" href="{{ path('modifService',{'id':service.id}) }}"> Modifier</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" href="{{ path('supp_service',{'id':service.id}) }}"> Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <a class="btn btn-outline-info" href="{{path('addService')}}">Retour Ajouter </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'basefront.html.twig' %}
+{% block body %}
+
+
+ 
+
+
+<section class="section service-2">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="service-block mb-5">
+                 {% for ce in cc %}
+					<img src="{{ asset('assets/'~ce.image) }}" alt="" class="img-fluid">
+                    
+					<div class="content">
+						
+                        <h4 class="mt-4 mb-2 title-color">{{ce.date|date}}</h4>
+                         
+                        <td></td>
+						<p class="mb-4">Medecin:Dr.{{ ce.consultation.medecin.nom}}</p>
+                        <p class="mb-4">Patient:M.{{ ce.consultation.patient.nom}}</p>
+                        {% endfor %}
+					</div>
+				</div>
+			</div>
+	
+    
+</section>
+
+                              
+
+
+{% endblock %}
