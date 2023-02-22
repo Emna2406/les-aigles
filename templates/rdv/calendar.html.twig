@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+
+
+
+
+{% block title %}Calendrier{% endblock %}
+
+
+{% block stylesheets %}
+ <a    href="{{asset('/affrdv')}}">  <----- Liste de Rendez-vous  </a>
+    <style>
+        #calendrier{
+            width: 55%;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div id="calendrier">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    window.onload = () => {
+        let calendarElt = document.querySelector("#calendrier")
+        let calendar = new FullCalendar.Calendar(calendarElt, {
+            initialView: 'dayGridMonth',
+               locale: 'fr',
+            headerToolbar: {
+                start: 'prev,next today',
+                center: 'title',
+                
+              
+                end: 'dayGridMonth,timeGridWeek'
+            },
+            events: {{ data|raw }},
+            editable: true,
+           
+
+             eventColor: ' ##FFFF00',
+             eventTextColor:'#FFFF00',
+             eventBorderColor:'#FF0000',
+            eventResizableFromStart: true })
+            
+       
+        calendar.render()
+    }
+</script>
+
+{% endblock %}

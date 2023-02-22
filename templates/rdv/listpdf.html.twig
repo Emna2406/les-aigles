@@ -1,0 +1,36 @@
+    <h1 ALIGN="center">Liste des produits</h1><br>
+<table border="2" >
+
+    <thead>
+    <tr>
+        <th>     id rendez-vous     </th>
+        <th>     nom patient     </th>
+
+          <th>   nom medecin   </th>
+  
+                  
+                           <th>     Adresse Mail     </th>
+                      <th> Date  Heure               </th>
+                       
+                    <th>    Numero Telephone     </th>
+                    <th>      Message            </th>
+
+    </tr>
+    </thead>
+    <tbody>
+   {% for c in listrdvpdf %}
+   <tr>
+        <td>{{c.idrdv}}  </td>
+         <td>{{c.nompatient}}  </td>
+        <td>{{c.medecin.nommedecin}}  </td>
+        
+        <td> {{c.adr}} </td>
+        <td>{{c.date|date('H:i     d/m/Y')}}</td>
+        <td>{{ c.numtel}}  </td>
+        <td>{{c.message}}  </td>
+        
+
+    </tr >
+   {% endfor %}
+    </tbody>
+</table>
