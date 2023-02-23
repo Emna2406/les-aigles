@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light rounded h-100 p-4">
+		<h1>Liste des produits</h1>
+
+
+		<table class="table">
+
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>Stock</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<a class="btn btn-lg btn-primary m-2" href="{{ path('app_produit_new') }}">Create
+
+				</a>
+
+				{% for produit in produits %}
+					<tr>
+						<td>{{ produit.id }}</td>
+						<td>{{ produit.nom }}</td>
+						<td>{{ produit.stock }}</td>
+
+
+						<td>
+
+							<a class="btn btn-lg btn-primary m-2" href="{{ path('app_produit_edit', {'id': produit.id}) }}">
+								Edit
+							</a>
+
+						</td>
+
+
+						<td>
+
+							<a class="btn btn-lg btn-primary m-2" href="{{ path('app_produit_delete', {'id': produit.id}) }}">
+								Delete
+							</a>
+
+						</td>
+
+
+					</tr>
+
+				{% else %}
+					<tr>
+						<td colspan="4">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</tbody>
+	</table>
+
+{% endblock %}

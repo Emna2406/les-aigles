@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Produit
+{% endblock %}
+
+{% block body %}
+	<h1>Create new Produit</h1>
+
+	{{ include('produit/_form.html.twig') }}
+	<div>
+		<style>
+			.my-button {
+				background-color: <?php echo $color; ?>
+				;
+				color: blue;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+
+		<a class="btn btn-lg btn-primary m-2" href="{{ path('app_produit_index') }}">Ajouter</a>
+
+	</div>
+
+
+	<div>
+		<style>
+			.my-button {
+				background-color: <?php echo $color; ?>
+				;
+				color: blue;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+
+		<a class="my-button" style="float: right;" href="{{ path('app_produit_index') }}">back to list</a>
+	</div>
+{% endblock %}
