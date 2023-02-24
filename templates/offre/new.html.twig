@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Offre{% endblock %}
+
+{% block body %}
+    <h1>Create new Offre</h1>
+
+    {{ include('offre/_form.html.twig') }}
+
+    
+
+	<div>
+		<style>
+			.my-button {
+				background-color: <?php echo $color; ?>
+				;
+				color: blue;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+
+		<a class="my-button" style="float: right;" href="{{ path('app_offre_index') }}">back to list</a>
+	</div>
+{% endblock %}

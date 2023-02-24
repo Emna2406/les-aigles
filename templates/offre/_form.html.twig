@@ -1,0 +1,28 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+   
+<label class="form-label">description</label>
+
+{{ form_widget(form.description,{'attr':{'class':'form-control'}}) }}
+{{ form_errors(form.description,{'attr':{'class':'text-danger'}}) }}
+
+<label class="form-label">nbrPlaces</label>
+{{ form_widget(form.nbrPlaces,{'attr':{'class':'form-control'}}) }}
+{{ form_errors(form.nbrPlaces,{'attr':{'class':'text-danger'}}) }}
+<div>
+		<style>
+			.my-button {
+				background-color: <?php echo $color; ?>
+				;
+				color: blue;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+
+		<button class="btn btn-lg btn-primary m-2" type="submit" >Ajouter</button>
+
+	</div>
+{{ form_end(form) }}
+

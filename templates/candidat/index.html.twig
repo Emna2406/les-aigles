@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat index{% endblock %}
+
+{% block body %}
+    <h1>Candidat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCand</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Cv</th>
+                <th>Email</th>
+                <th>IdOffre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <a class="btn btn-lg btn-primary m-2" href="{{ path('app_candidat_new') }}">Create
+
+				</a>
+        <tbody>
+        {% for candidat in candidats %}
+            <tr>
+                <td>{{ candidat.idCand }}</td>
+                <td>{{ candidat.nom }}</td>
+                <td>{{ candidat.prenom }}</td>
+                <td>{{ candidat.cv }}</td>
+                <td>{{ candidat.email }}</td>
+                <td>{{ candidat.idOffre }}</td>
+                <td>
+
+							<a class="btn btn-lg btn-primary m-2" href="{{ path('app_candidat_edit', {'idCand': candidat.idCand}) }}">
+								Edit
+							</a>
+
+						</td>
+
+
+						<td>
+
+							<a class="btn btn-lg btn-primary m-2" href="{{ path('app_candidat_delete', {'idCand': candidat.idCand}) }}">
+								Delete
+							</a>
+
+						</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

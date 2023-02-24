@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre{% endblock %}
+
+{% block body %}
+    <h1>Offre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdOffre</th>
+                <td>{{ offre.idOffre }}</td>
+            </tr>
+            <tr>
+                <th>IdService</th>
+                <td>{{ offre.idService }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ offre.description }}</td>
+            </tr>
+            <tr>
+                <th>NbrPlaces</th>
+                <td>{{ offre.nbrPlaces }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+   
+    {{ include('offre/_delete_form.html.twig') }}
+    <div>
+		<style>
+			.my-button {
+				background-color: <?php echo $color; ?>
+				;
+				color: blue;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+
+		<a class="my-button" style="float: right;" href="{{ path('app_offre_index') }}">back to list</a>
+	</div>
+
+	{# <a href="{{ path('app_offre_edit', {'idOffre': offre.idOffre}) }}">edit</a> #}
+
+
+{% endblock %}
+
+{% endblock %}
