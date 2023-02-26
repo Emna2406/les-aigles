@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+     {% block body %}
+<div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">Users</h6>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"> Libelle</th>
+            <th scope="col">MODIFIER</th>
+            <th scope="col">SUPPRIMER</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for type in t %}
+            <tr>
+                <td>{{ type.lib }}</td>
+
+
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
