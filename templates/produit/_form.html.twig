@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+
+<label class="form-label">nom</label>
+
+{{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
+{{ form_errors(form.nom,{'attr':{'class':'text-danger'}}) }}
+<label class="form-label">stock</label>
+{{ form_widget(form.stock,{'attr':{'class':'form-control'}}) }}
+{{ form_errors(form.stock,{'attr':{'class':'text-danger'}}) }}
+<div>
+
+	<style>
+		.my-button {
+			background-color: <?php echo $color; ?>
+			;
+			color: blue;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+	<button type="submit" class="btn btn-info mt-2 text-white">Save</button>
+
+</div>
+
+{{ form_end(form) }}
