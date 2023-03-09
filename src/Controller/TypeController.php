@@ -19,7 +19,7 @@ class TypeController extends AbstractController
     public function index(): Response
     {
         $type = $this->getDoctrine()->getManager()->getRepository(Type::class)->findAll();
-        return $this->render('type/index.html.twig', [
+        return $this->render('admin/type/index.html.twig', [
             't' => $type
         ]);
     }
@@ -44,7 +44,7 @@ class TypeController extends AbstractController
 
             return $this->redirectToRoute('displayType');
         }
-        return $this->render('type/CreateTypeUser.html.twig',['t'=>$form->createView()]);
+        return $this->render('admin/type/CreateTypeUser.html.twig',['t'=>$form->createView()]);
     }
 
     /**
@@ -78,7 +78,7 @@ class TypeController extends AbstractController
 
             return $this->redirectToRoute('displayType');
         }
-        return $this->render('type/updatetype.html.twig',['t'=>$form->createView()]);
+        return $this->render('admin/type/updatetype.html.twig',['t'=>$form->createView()]);
     }
 
 

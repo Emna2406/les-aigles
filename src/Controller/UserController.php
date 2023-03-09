@@ -12,12 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="display")
+     * @Route("/user", name="displayadmin")
      */
     public function index(): Response
     {
         $user = $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
-        return $this->render('user/index.html.twig', [
+        return $this->render('admin/user/index.html.twig', [
             'b'=>$user
         ]);
     }
@@ -39,9 +39,9 @@ class UserController extends AbstractController
             $em->persist($user);//Add
             $em->flush();
 
-            return $this->redirectToRoute('display');
+            return $this->redirectToRoute('displayadmin');
         }
-        return $this->render('user/createUser.html.twig',['f'=>$form->createView()]);
+        return $this->render('admin/user/createUser.html.twig',['f'=>$form->createView()]);
     }
 
     /**
@@ -53,7 +53,7 @@ class UserController extends AbstractController
         $em->remove($user);
         $em->flush();
 
-        return $this->redirectToRoute('display');
+        return $this->redirectToRoute('displayadmin');
 
 
     }
@@ -73,77 +73,11 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirectToRoute('display');
+            return $this->redirectToRoute('displayadmin');
         }
-        return $this->render('user/updateuser.html.twig',['f'=>$form->createView()]);
+        return $this->render('admin/user/updateuser.html.twig',['f'=>$form->createView()]);
     }
 
 
-    /************************************************Front****************************************************************/
-    /**
-     * @Route("/", name="frontdisplay")
-     */
-    public function indexFront(): Response
-    {
-        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
-        return $this->render('userFront/index.html.twig', [
-            'b'=>$user
-        ]);
-    }
-
-    /**
-     * @Route("/frontadduser", name="frontadduser")
-     */
-    public function frontaddUser(Request $request): Response
-    {
-        $user = new User();
-
-        $form = $this->createForm(UserType::class,$user);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);//Add
-            $em->flush();
-
-            return $this->redirectToRoute('frontdisplay');
-        }
-        return $this->render('userFront/createUser.html.twig',['f'=>$form->createView()]);
-    }
-
-    /**
-     * @Route("/frontremoveuser/{id}", name="front_supp_user")
-     */
-    public function frontsuppressionUser(User  $user): Response
-    {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($user);
-        $em->flush();
-
-        return $this->redirectToRoute('frontdisplay');
-
-
-    }
-
-    /**
-     * @Route("/frontmodifuser/{id}", name="frontmodifuser")
-     */
-    public function frontmodifuser(Request $request,$id): Response
-    {
-        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->find($id);
-
-        $form = $this->createForm(UserType::class,$user);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-
-            return $this->redirectToRoute('frontdisplay');
-        }
-        return $this->render('user/updateuser.html.twig',['f'=>$form->createView()]);
-    }
 
 }

@@ -4,27 +4,36 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Security\UserProvider;
 
 class UserType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $user, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $user
-            ->add('nom')
-            ->add('prenom')
+        $builder
             ->add('email')
-            ->add('username')
-            ->add('pass', PasswordType::class)
+            ->add('name')
+            ->add('lastname')
+            ->add('phone')
+            ->add('password',RepeatedType::class, [
+                'type'=>PasswordType::class,
+                'first_options'=>['label'=>'Password'],
+                'second_options'=>['label'=>'Confirm Password']
+            ])
             ->add('ajouter',SubmitType::class)
             ->add('Reset',ResetType::class)
-
-
         ;
     }
 
-
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            // Configure your form options here
+        ]);
+    }
 }
