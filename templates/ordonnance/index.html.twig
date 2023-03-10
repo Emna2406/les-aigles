@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+</br>
+</br>
+</br>
+ 
+<div class="row">
+
+                        <div class="bg-light rounded h-100 p-4">
+                        <div class="card-body">
+                   
+                            <h6 class="mb-4">Les Ordonnance</h6>
+                           
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                             
+                                             <th>nom de medecin </th>
+                                        <th>nom de patient </th>
+                                          
+                                            <th>date de Ordonnance </th>
+                                            
+                                            <th>description</th>
+                                            <th>Supprimer</th>
+                                             <th>Modifer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for ce in c%}
+   <tr>
+
+   <td> 
+   <img src="{{ asset('assets/'~ce.image) }}" height="260" width="260">
+   </td>
+
+<td>{{ ce.consultation.medecin.nom}}</td>
+  <td>{{ ce.consultation.patient.nom}}</td>
+   <td>{{ce.date|date}} </td>
+    <td>{{ce.description}} </td>
+   
+   
+
+   <td>
+    <a class="btn btn-sm btn-primary" href="{{ path('supp_ordonnance',{'id':ce.id}) }}">Supprimer </a>
+    </td>
+   <td>
+    <a class="btn btn-sm btn-primary" href="{{ path('modifOrdonnance',{'id':ce.id}) }}">Modifier </a>
+    </td>
+   </tr>
+               <tr>
+   <td> <a href="{{ path('ssdd', {'id': ce.id}) }}" title="Share on Facebook" style=" 
+    background-color: #3b5998; color: white; font-weight: bold; padding: 5px; border-radius: 5px; text-decoration: none;
+    display: inline-block; text-align: center; border: 1px solid #3b5998;">
+    <i class="fab fa-facebook-f" style="margin-right: 5px;"></i> Share
+</a>
+</td>
+</tr>   
+
+   {%endfor%}
+                                </tbody>
+                                
+                            </table>
+                             <form class="d-none d-md-flex ms-4"method="post" action="{{asset('/listpdfm')}}">
+               <a   class="btn btn-primary m-2" href="{{asset('/listpdfm')}}">  <i class="fas fa-file-pdf"></i>  ImprimerPDF  </a>
+			   </form>
+
+     
+ 
+                            
+     
+                        </div>
+                       
+                    </div>
+                    </div>
+                    </div>
+                     
+                    </div>
+                    </div>
+
+
+</div>
+{% endblock %}
