@@ -1,0 +1,28 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}New Candidat{% endblock %}
+{% block header %} 
+{{ parent() }}  {% endblock %}
+{% block body %}
+    <h1>Create new Candidat</h1>
+
+    {{ include('candidat/_form.html.twig') }}
+
+    
+
+	<div>
+		<style>
+			.my-button {
+				background-color: <?php echo $color; ?>
+				;
+				color: blue;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+
+		<a class="my-button" style="float: right;" href="{{ path('app_candidat_index') }}">back to list</a>
+	</div>
+{% endblock %}

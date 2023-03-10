@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre index{% endblock %}
+
+{% block body %}
+    <div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;">
+    <h1>Listes des offres</h1>
+     <a class="btn btn-lg btn-primary m-2" href="{{ path('app_offre_new') }}" style="height:fit-content;color=#FF0000">Create</a>
+    </div>
+    <table class="table" style="width:96%;text-align:center;align-self:center;vertical-align:middle;">
+        <thead>
+            <tr>
+                <th>IdOffre</th>
+                <th>IdService</th>
+                <th>Description</th>
+                <th>NbrPlaces</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+         
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.idOffre }}</td>
+                <td>{{ offre.idService }}</td>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.nbrPlaces }}</td>
+                  <td>
+
+							<a class="btn btn-lg btn-primary m-2" href="{{ path('app_offre_edit', {'idOffre': offre.idOffre}) }}">
+								Edit
+							</a>
+
+						</td>
+
+
+						<td>
+
+                        {{ include('offre/_delete_form.html.twig') }}
+
+
+						</td>
+
+
+                       
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+<div style="  display: flex;
+  justify-content: center;
+  margin-top: 20px;">
+
+
+{{ knp_pagination_render(offres, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+        </div>
+{% endblock %}

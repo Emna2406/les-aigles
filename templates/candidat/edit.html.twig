@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Candidat{% endblock %}
+
+{% block body %}
+    <h1>Edit Candidat</h1>
+
+    
+
+    <style>
+		.my-button {
+			background-color: <?php echo $color; ?>
+			;
+			color: blue;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+
+	{{ include('candidat/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+		<a class="my-button" style="float: right;" href="{{ path('app_candidat_index') }}">back to list</a>
+
+
+	</br>
+	</br>
+
+	
+{% endblock %}

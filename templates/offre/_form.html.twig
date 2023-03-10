@@ -1,0 +1,32 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+   <br/>
+<label class="form-label">Description</label>
+{{ form_widget(form.description,{'attr':{'class':'form-control-sm'}}) }}
+{{ form_errors(form.description,{'attr':{'class':'text-danger'}}) }}
+<br/>
+<label class="form-label">NbrPlaces</label>
+{{ form_widget(form.nbrPlaces,{'attr':{'class':'form-control-sm'}}) }}
+{{ form_errors(form.nbrPlaces,{'attr':{'class':'text-danger'}}) }}
+<br/>
+<label class="form-label">idService</label>
+{{ form_widget(form.idService,{'attr':{'class':'form-control-sm'}}) }}
+{{ form_errors(form.idService,{'attr':{'class':'text-danger'}}) }}
+<div>
+
+	<style>
+		.my-button {
+			background-color: <?php echo $color; ?>
+			;
+			color: blue;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+	<button type="submit" class="btn btn-info mt-2 text-white">Save</button>
+
+</div>
+
+{{ form_end(form) }}
+

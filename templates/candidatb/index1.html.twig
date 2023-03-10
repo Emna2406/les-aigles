@@ -1,0 +1,9 @@
+
+{% extends 'base1.html.twig' %}
+{% block a %} 
+
+<form class="d-none d-md-flex ms-4"method="post" action="{{asset('/listpdf')}}">
+               <a   class="btn btn-primary m-2" href="{{asset('/listpdf')}}">  <i class="fas fa-file-pdf"></i>  ImprimerPDF  </a>
+			   </form>
+
+               {%  endblock %} 

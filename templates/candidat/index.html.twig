@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat{% endblock %}
+{% block body %}
+    
+<h1>Candidat</h1>
+
+  <table class="table" style="width:96%;text-align:center;align-self:center;vertical-align:middle;">
+        <thead>
+            <tr>
+                <th>IdCand</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>CV</th>
+                 <th>IdService</th>
+                <th colspan="2">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+         
+        {% for candidat in candidats %}
+            <tr>
+                <td>{{ candidat.idCand }}</td>
+                <td>{{ candidat.nom }}</td>
+                <td>{{ candidat.prenom }}</td>
+                <td>{{ candidat.email }}</td>
+                <td>{{ candidat.cv }}</td>
+                <td>{{ candidat.IdService }}</td>
+                  <td>
+							<a class="btn btn-lg btn-primary m-2" href="{{ path('app_candidat_edit', {'idCand': candidat.idCand})  }}">
+								Edit
+							</a>
+                    </td>
+                    <td>
+                        {#<a class="btn btn-lg btn-primary m-2" href="{{ path('app_candidat_delete', {'idCand': candidat.idCand})  }}">
+								Show details
+							</a>#}
+                            {{ include('candidat/_delete_form.html.twig') }}
+						<td>
+                        {# {{ include('candidat/_delete_form.html.twig') }} #} 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+   
+
+	{#<div>
+		{#<style>
+			.my-button {
+				background-color: <?php echo $color; ?>
+				;
+				color: blue;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+
+		<a class="my-button" style="float: right;" href="{{ path('app_candidat_index') }}">back to list</a>
+	</div>
+
+	 <a href="{{ path'app_candidat_edit' }}">edit</a> #}
+
+</br>
+</br>
+</br>
+</br>
+</br>
+{% endblock %}
+
+

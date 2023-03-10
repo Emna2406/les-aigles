@@ -1,0 +1,71 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Offre index{% endblock %}
+
+{% block body %}
+    <div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;">
+    <h1>Listes des offres</h1>
+    </div>
+    <form action="{{ path('app_listoffre_indexF') }}" method="get">
+                                <input type="text" name="q" value="{{ query }}" placeholder="Search...">
+                                <button class="sr">Search</button>
+                                    <style>
+                                        .sr {
+                                        background-color: #FFFFFF; /* Green */
+                                        border: none;
+                                        color: black;
+                                        padding: 2px 6px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 16px;
+                                        margin: 4px 2px;
+                                        cursor: pointer;
+                                        border-radius: 10px;
+                                        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+                                        }
+
+                                        .sr:hover {
+                                        background-color: #6A5ACD; /* Darker green */
+                                        }
+
+                                    </style>
+                                <a href="{{ path('app_listoffre_indexF') }}" class="btn btn-secondary">Clear</a>
+                            </form>
+    <table class="table" style="width:96%;text-align:center;align-self:center;vertical-align:middle;">
+        <thead>
+            <tr>
+                <th>IdOffre</th>
+                <th>IdService</th>
+                <th>Description</th>
+                <th>NbrPlaces</th>
+            </tr>
+        </thead>
+        <tbody>
+         
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.idOffre }}</td>
+                <td>{{ offre.idService }}</td>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.nbrPlaces }}</td>
+  
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+<div style="  display: flex;
+  justify-content: center;
+  margin-top: 20px;">
+
+
+{{ knp_pagination_render(offres, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+        </div>
+{% endblock %}
