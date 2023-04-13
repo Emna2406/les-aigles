@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="723.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.ConsultationController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7ab4eb" height="724.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="402.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8dbfee" height="293.0" layoutX="-2.0" layoutY="431.0" stroke="BLACK" strokeType="INSIDE" width="1005.0" />
+      <Label layoutX="14.0" layoutY="166.0" prefHeight="21.0" prefWidth="89.0" text="id_patient :" textAlignment="RIGHT" />
+      <Label layoutX="15.0" layoutY="390.0" text="image :" />
+      <Label layoutX="17.0" layoutY="228.0" text="id_medecin :" />
+      <Label layoutX="15.0" layoutY="293.0" prefHeight="21.0" prefWidth="63.0" text="date :" />
+      <TableView fx:id="tablec" layoutX="402.0" layoutY="67.0" onMouseClicked="#med" prefHeight="364.0" prefWidth="573.0">
+        <columns>
+          <TableColumn fx:id="colpc" prefWidth="109.0" text="nom patient" />
+          <TableColumn fx:id="colmc" prefWidth="110.0" text="nom medecin" />
+            <TableColumn fx:id="coldc" prefWidth="141.0" text="date" />
+            <TableColumn fx:id="colimgc" prefWidth="153.0" text="image" />
+            <TableColumn fx:id="colidc" prefWidth="59.0" text="id" />
+        </columns>
+      </TableView>
+      <Label layoutX="17.0" layoutY="109.0" text="id :" />
+      <Button fx:id="ajoutc" layoutX="134.0" layoutY="463.0" mnemonicParsing="false" onAction="#ajoutcons" text="Ajouter" />
+      <Button fx:id="annulec" layoutX="281.0" layoutY="463.0" mnemonicParsing="false" onAction="#annuler1" text="Annuler" />
+      <Button fx:id="modifc" layoutX="482.0" layoutY="463.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+      <Button fx:id="suppc" layoutX="768.0" layoutY="463.0" mnemonicParsing="false" onAction="#supprimer_rdv" text="Supprimer" />
+      <TextField fx:id="idc" layoutX="134.0" layoutY="104.0" />
+      <TextField fx:id="imgc" layoutX="134.0" layoutY="385.0" />
+      <DatePicker fx:id="datec" layoutX="135.0" layoutY="299.0" />
+      <ComboBox fx:id="medecinc" layoutX="135.0" layoutY="223.0" prefHeight="31.0" prefWidth="209.0" />
+      <ComboBox fx:id="patientc" layoutX="135.0" layoutY="161.0" prefHeight="31.0" prefWidth="209.0" />
+      <RadioButton fx:id="rdc" layoutX="427.0" layoutY="23.0" mnemonicParsing="false" onAction="#checkajouter1" text="ajouter" />
+      <RadioButton fx:id="mdc" layoutX="559.0" layoutY="23.0" mnemonicParsing="false" onAction="#checkmodif1" text="modifier" />
+      <RadioButton fx:id="sdc" layoutX="679.0" layoutY="23.0" mnemonicParsing="false" onAction="#checksuppr1" text="supprimer" />
+      <Label fx:id="label2" layoutX="186.0" layoutY="44.0" />
+      <Button layoutX="857.0" layoutY="18.0" mnemonicParsing="false" onAction="#Jump" text="Go to Ord--&gt;" />
+      <Label layoutX="160.0" layoutY="27.0" text="Consultation">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

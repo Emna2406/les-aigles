@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="830.0" prefWidth="1109.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.OrdonnanceController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ec3f5" height="430.0" layoutX="1.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="1109.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#88bff2" height="830.0" layoutX="-1.0" stroke="BLACK" strokeType="INSIDE" width="440.0" />
+      <Label layoutX="36.0" layoutY="76.0" text="id :" />
+      <Label layoutX="36.0" layoutY="144.0" text="consul_id :" />
+      <Label layoutX="36.0" layoutY="223.0" text="date :" />
+      <Label layoutX="36.0" layoutY="302.0" text="description :" />
+      <Label layoutX="36.0" layoutY="405.0" text="image :" />
+      <TextField fx:id="ido" layoutX="105.0" layoutY="71.0" />
+      <TextField fx:id="desco" layoutX="149.0" layoutY="297.0" onKeyReleased="#testchaine" />
+      <TextField fx:id="imgo" layoutX="140.0" layoutY="400.0" />
+      <TableView fx:id="tableo" layoutX="438.0" layoutY="87.0" onMouseClicked="#med" prefHeight="314.0" prefWidth="672.0">
+        <columns>
+          <TableColumn fx:id="colidco" prefWidth="102.0" text="id cons" />
+          <TableColumn fx:id="coldo" prefWidth="132.0" text="date" />
+            <TableColumn fx:id="coldeso" prefWidth="119.0" text="description" />
+            <TableColumn fx:id="colimgo" prefWidth="191.0" text="image" />
+            <TableColumn fx:id="colido" prefWidth="75.0" text="id" />
+        </columns>
+      </TableView>
+      <Button fx:id="ajto" layoutX="73.0" layoutY="508.0" mnemonicParsing="false" onAction="#ajoutord" text="Ajouter" />
+      <Button fx:id="anno" layoutX="295.0" layoutY="508.0" mnemonicParsing="false" onAction="#annuler2" text="Annuler" />
+      <Button fx:id="modo" layoutX="590.0" layoutY="508.0" mnemonicParsing="false" onAction="#modifierord" text="Modifier" />
+      <Button fx:id="suppo" layoutX="807.0" layoutY="508.0" mnemonicParsing="false" onAction="#supprimer_ord" text="Supprimer" />
+      <DatePicker fx:id="dateo" layoutX="127.0" layoutY="218.0" prefHeight="31.0" prefWidth="212.0" />
+      <ComboBox fx:id="conso" layoutX="140.0" layoutY="139.0" prefWidth="150.0" />
+      <Label fx:id="label3" layoutX="180.0" layoutY="26.0" />
+      <RadioButton fx:id="ado" layoutX="493.0" layoutY="26.0" mnemonicParsing="false" onAction="#checkajouter3" text="ajouter" />
+      <RadioButton fx:id="mdo" layoutX="590.0" layoutY="26.0" mnemonicParsing="false" onAction="#checkmodif3" text="modifier" />
+      <RadioButton fx:id="sdo" layoutX="706.0" layoutY="26.0" mnemonicParsing="false" onAction="#checksuppr3" text="supprimer" />
+      <Label fx:id="erreur3" layoutX="216.0" layoutY="339.0" />
+      <Button layoutX="928.0" layoutY="21.0" mnemonicParsing="false" onAction="#jump1" text="Go to Cert--&gt;" />
+      <Label alignment="TOP_CENTER" layoutX="117.0" layoutY="16.0" prefHeight="21.0" prefWidth="175.0" text="Ordonnance" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
