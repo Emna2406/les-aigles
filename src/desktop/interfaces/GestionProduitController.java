@@ -5,16 +5,15 @@
  */
 package desktop.interfaces;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
-import desktop.entities.Partenaire;
 import desktop.entities.Produit;
-import desktop.services.PartenaireCRUD;
 import desktop.services.ProduitCRUD;
+import desktop.tools.MailAPI;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,13 +25,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
 
 /**
  * FXML Controller class
@@ -41,16 +39,15 @@ import javafx.stage.Stage;
  */
 public class GestionProduitController implements Initializable {
 
-    private TextField nomField;
-
+    @FXML
     private TextField stockField;
 
     @FXML
     private TableView<Produit> produitTable;
 
     private ObservableList<Produit> produitList;
-    @FXML
-    private TextField nomfield;
+     @FXML
+    private TextField nomField;
     @FXML
     private Button btnadd;
     @FXML
@@ -63,25 +60,23 @@ public class GestionProduitController implements Initializable {
     private TableColumn<Produit, String> nomcol;
     @FXML
     private TableColumn<Produit, Integer> stockcol;
-    @FXML
-    private Spinner<Integer> stockspin;
+
     private Produit prod;
 
     private List<Produit> list_categorie;
     ProduitCRUD su = new ProduitCRUD();
     ObservableList<Produit> data;
+   
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setBtn();
         data = FXCollections.observableList(su.display());
-        SpinnerValueFactory<Integer> valueFactory_s = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99999999, 1, 1);
-        valueFactory_s.setValue(1);
-        
 
         idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomcol.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        stockspin.setValueFactory(valueFactory_s);
+        stockcol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
         produitTable.setItems(data);
 
         produitTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -91,7 +86,6 @@ public class GestionProduitController implements Initializable {
             }
 
         });
-
     }
 
     public void refreshList() {
@@ -118,10 +112,11 @@ public class GestionProduitController implements Initializable {
 
     @FXML
     private void addProduit(ActionEvent event) {
+        {
+        try {
         ProduitCRUD pc = new ProduitCRUD();
         String nom = nomField.getText();
-        Integer stock = stockspin.getValue();
-
+        int stock = Integer.valueOf(stockField.getText());
         if (nom.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("'Nom' must be inputed");
@@ -138,17 +133,25 @@ public class GestionProduitController implements Initializable {
             alert.show();
             //redirectToListProduit();
         }
+        
+                MailAPI.sendMail("emna.baccar@esprit.tn", "Produit Ajouté", "Bravo, l'ajout du produit a été réussi ");
+            } catch (MessagingException ex) {
+                Logger.getLogger(GestionPartenaireController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
 
         refreshList();
+    }
     }
 
     @FXML
     private void updateProduit(ActionEvent event) {
         ProduitCRUD pc = new ProduitCRUD();
         String nom = nomField.getText();
-        Integer stock = stockspin.getValue();
+        int stock = Integer.valueOf(stockField.getText());
 
         pc.update(prod.getId(), new Produit(nom, stock));
+
         refreshList();
     }
 

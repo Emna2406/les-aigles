@@ -7,14 +7,16 @@ package desktop.interfaces;
 
 import desktop.entities.Partenaire;
 import desktop.services.PartenaireCRUD;
+import desktop.tools.MailAPI;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,8 +29,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
 
 /**
  * FXML Controller class
@@ -55,59 +57,54 @@ public class GestionPartenaireController implements Initializable {
     private TableColumn<Partenaire, String> nomcol;
     @FXML
     private TableColumn<Partenaire, String> emailcol;
-    
-    private Partenaire part;
-    
-    private List<Partenaire> list_categorie;
-    PartenaireCRUD su=new PartenaireCRUD();
-      ObservableList<Partenaire> data;
 
+    private Partenaire part;
+
+    private List<Partenaire> list_categorie;
+    PartenaireCRUD su = new PartenaireCRUD();
+    ObservableList<Partenaire> data;
 
     /**
      * Initializes the controller class.
      */
-     @Override
-    public void initialize(URL url, ResourceBundle rb) { 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         setBtn();
-        data=FXCollections.observableList(su.display());
-       
+        data = FXCollections.observableList(su.display());
+
         idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomcol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         emailcol.setCellValueFactory(new PropertyValueFactory<>("email"));
-       
+
         partenaireTable.setItems(data);
-        
+
         partenaireTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if(newSelection != null)
-            {
+            if (newSelection != null) {
                 part = newSelection;
                 setBtn();
             }
 
         });
-        
+
     }
-    public void refreshList(){
+
+    public void refreshList() {
         data.clear();
-        data=FXCollections.observableList(su.display());
-       
+        data = FXCollections.observableList(su.display());
+
         idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomcol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         emailcol.setCellValueFactory(new PropertyValueFactory<>("email"));
-       
+
         partenaireTable.setItems(data);
-        
+
     }
-    
-    private void setBtn()
-    {
-        if (part == null)
-        {
+
+    private void setBtn() {
+        if (part == null) {
             btnupdate.setDisable(true);
             btndelete.setDisable(true);
-        }
-        else
-        {
+        } else {
             btnupdate.setDisable(false);
             btndelete.setDisable(false);
         }
@@ -115,38 +112,46 @@ public class GestionPartenaireController implements Initializable {
 
     @FXML
     private void addPartenairee(ActionEvent event) {
+        {
+        try {
         PartenaireCRUD pc = new PartenaireCRUD();
         String nom = nomField.getText();
-       String email = emailField.getText();
-       
+        String email = emailField.getText();
         
-         if (nom.isEmpty()) {
+
+        if (nom.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("'Nom' must be inputed");
             alert.setTitle("Problem");
             alert.setHeaderText(null);
             alert.showAndWait();
-        }  else 
-          if (email.isEmpty()) {
+        } else if (email.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("'email' must be inputed");
             alert.setTitle("Problem");
             alert.setHeaderText(null);
             alert.showAndWait();
-        }  else
-          {
-                Partenaire p = new Partenaire( nom,email);
-                pc.AddEntity(p);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setContentText("Added .");
-                alert.setHeaderText(null);
-                alert.show();
-                //redirectToListProduit();
-            }
-         
-         refreshList();
+        } else {
+            Partenaire p = new Partenaire(nom, email);
+            pc.AddEntity(p);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setContentText("Added .");
+            alert.setHeaderText(null);
+            alert.show();
+            //redirectToListProduit();
         }
+            
+                MailAPI.sendMail("emna.baccar@esprit.tn", "Partenaire Ajouté", "Bravo, l'ajout du partenaire a été réussi ");
+            } catch (MessagingException ex) {
+                Logger.getLogger(GestionPartenaireController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        refreshList();
+
+    }
 
     @FXML
     private void updatePartenaire(ActionEvent event) {
@@ -164,8 +169,6 @@ public class GestionPartenaireController implements Initializable {
         refreshList();
     }
 
-   
-
     @FXML
     private void redirectToHomePage(ActionEvent event) {
         try {
@@ -175,8 +178,8 @@ public class GestionPartenaireController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage()+ ex.getStackTrace());
+            System.out.println(ex.getMessage() + ex.getStackTrace());
         }
-}
+    }
 
 }

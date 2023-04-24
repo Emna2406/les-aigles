@@ -17,13 +17,25 @@ import javafx.stage.Stage;
  *
  * @author msi
  */
-public class Home extends Application {
+
+    /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author msi
+ */
+public class Accueil  extends Application {
     
     @Override
     public void start(Stage primaryStage) {
         
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+       
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("Front.fxml"));
 
             Scene scene = new Scene(root);
             
@@ -33,7 +45,6 @@ public class Home extends Application {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        
     }
    
   
@@ -45,3 +56,6 @@ public class Home extends Application {
     }
     
 }
+
+    
+

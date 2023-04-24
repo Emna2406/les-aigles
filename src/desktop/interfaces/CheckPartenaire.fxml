@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="desktop.interfaces.CheckPartenaireController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="477.0" prefWidth="907.0" style="-fx-background-color: #F5B7B1;">
+         <children>
+            <ImageView fitHeight="398.0" fitWidth="907.0" layoutX="-1.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/clinique.jpg" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="90.0" prefWidth="906.0" style="-fx-background-color: #ff3364;">
+               <children>
+                  <ImageView fitHeight="85.0" fitWidth="342.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/santiana.jpg" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="123.0" style="-fx-background-color: #F5B7B1;" text="Se déconnecter">
+                     <font>
+                        <Font name="Arial Black" size="11.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <ImageView fitHeight="135.0" fitWidth="155.0" layoutX="21.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/permaflex.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="117.0" fitWidth="148.0" layoutX="172.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/randa.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="117.0" fitWidth="123.0" layoutX="30.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/seredom.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="135.0" fitWidth="97.0" layoutX="210.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/sfbt.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -12,7 +12,7 @@
    <children>
       <ImageView fx:id="img" fitHeight="580.0" fitWidth="841.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Pictures/2%20(3).jpg" />
+            <Image url="@../../img/2%20(3).jpg" />
          </image>
       </ImageView>
       <Pane fx:id="pane" layoutX="27.0" layoutY="115.0" prefHeight="435.0" prefWidth="299.0" style="-fx-background-color: #F5B7B1;">
@@ -34,7 +34,7 @@
       <Pane layoutY="83.0" prefHeight="0.0" prefWidth="810.0" style="-fx-background-color: #FDFEFE;" />
       <ImageView fx:id="logo" fitHeight="99.0" fitWidth="254.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Downloads/santiana.jpg" />
+            <Image url="@../../img/santiana.jpg" />
          </image>
       </ImageView>
       <Button fx:id="decbtn" layoutX="661.0" layoutY="47.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" style="-fx-background-insets: #ff3364;" text="Se déconnecter" textFill="#ff3364" />

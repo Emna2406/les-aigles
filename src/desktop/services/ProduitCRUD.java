@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package desktop.services;
-
 
 import desktop.entities.Partenaire;
 import desktop.entities.Produit;
@@ -20,18 +14,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- *
- * @author msi
+ * Service class for CRUD operations on Produit entity.
+ * Implements EntityCRUD interface.
  */
 public class ProduitCRUD implements EntityCRUD<Produit> {
- 
-    
+
     /**
+     * Adds a Produit entity to the database.
      *
-     * @param p
+     * @param p The Produit entity to be added.
      */
     @Override
-     public void AddEntity(Produit p) {
+    public void AddEntity(Produit p) {
         try {
             String requete1 = "INSERT INTO produit (id,nom,stock) VALUES(?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete1);
@@ -40,68 +34,27 @@ public class ProduitCRUD implements EntityCRUD<Produit> {
             pst.setInt(3, p.getStock());
             pst.executeUpdate();
             System.out.println("Bravo produit ajouté !");
-            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
+    /**
+     * Retrieves a list of all Produit entities from the database.
+     *
+     * @return The list of Produit entities.
+     */
     public ObservableList<Produit> listerProduits() {
         ObservableList<Produit> myList = FXCollections.observableArrayList();
         try {
-            
-            String requete2 = "Select * FROM produit";
+            String requete2 = "SELECT * FROM produit";
             Statement st = MyConnection.getInstance().getCnx().createStatement();
             ResultSet rs = st.executeQuery(requete2);
-            while (rs.next()) {
-               Produit rec = new Produit();
-                
-                rec.setId(rs.getInt("id"));
-                rec.setNom(rs.getString("nom"));
-                rec.setStock(rs.getInt("stock"));
-
-                
-                myList.add(rec);
-                
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            
-        }
-        return myList;
-    }
-    
-    public void delete(Produit p) {
-        
-        try {
-            String requete3 = "DELETE FROM produit WHERE id=" + p.getId();
-            Statement st = MyConnection.getInstance().getCnx().createStatement();
-            
-            st.executeUpdate(requete3);
-            System.out.println("Produit supprimé !");
-            
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-        
-    }
-
-    public ObservableList<Produit> SearchProd(String nom) {
-        ObservableList<Produit> myList = FXCollections.observableArrayList();
-        try {
-            
-            PreparedStatement ps = MyConnection.getInstance().getCnx().prepareStatement("SELECT * FROM produit  nom LIKE ?");
-            ps.setString(1, "%" + nom + "%");
-           
-            
-            ResultSet rs = ps.executeQuery();
-            
             while (rs.next()) {
                 Produit rec = new Produit();
                 rec.setId(rs.getInt("id"));
                 rec.setNom(rs.getString("nom"));
                 rec.setStock(rs.getInt("stock"));
-                
                 myList.add(rec);
             }
         } catch (SQLException ex) {
@@ -110,6 +63,31 @@ public class ProduitCRUD implements EntityCRUD<Produit> {
         return myList;
     }
 
+    /**
+     * Deletes a Produit entity from the database.
+     *
+     * @param p The Produit entity to be deleted.
+     */
+    public void delete(Produit p) {
+        try {
+            String requete3 = "DELETE FROM produit WHERE id=?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete3);
+            pst.setInt(1, p.getId());
+            pst.executeUpdate();
+            System.out.println("Produit supprimé !");
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    /**
+     * Searches for Produit entities in the database based on their nom.
+     *
+     * @param nom The nom to search for.
+     * @return The list of matching Produit entities.
+     */
+
+    
     
     public void update(int id, Produit r) {
         try {
@@ -126,7 +104,7 @@ public class ProduitCRUD implements EntityCRUD<Produit> {
         }
     }
 
-       @Override
+    @Override
     public ArrayList<Produit> display() {
         ArrayList<Produit> myList = new ArrayList<>();
             try {
@@ -141,7 +119,7 @@ public class ProduitCRUD implements EntityCRUD<Produit> {
             Produit p = new Produit();
             p.setId(rs.getInt(1));
             p.setNom(rs.getString("nom"));
-            p.setStock(rs.getInt("stock"));
+               p.setStock(rs.getInt("stock"));
             myList.add(p);
             
             
@@ -156,6 +134,6 @@ public class ProduitCRUD implements EntityCRUD<Produit> {
     
 return myList;
 }
-
 }
 
+  
