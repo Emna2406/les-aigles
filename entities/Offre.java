@@ -29,6 +29,10 @@ public class Offre {
         this.description = description;
         this.idservice = idservice;
     }
+
+    public Offre(String description, int nbrplaces, int idService) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     public int getId() {
