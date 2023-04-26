@@ -26,12 +26,18 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -51,7 +57,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.swing.JOptionPane;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -101,6 +109,8 @@ public class OrdonnanceController implements Initializable {
     private RadioButton sdo;
     @FXML
     private Label erreur3;
+    @FXML
+    private TextField trech;
 
     /**
      * Initializes the controller class.
@@ -190,7 +200,7 @@ public class OrdonnanceController implements Initializable {
 }
     @FXML
      private void ajoutord(javafx.event.ActionEvent mouseEvent)throws SQLException {
-        if (mouseEvent.getSource() ==ajto){
+        if ((mouseEvent.getSource() ==ajto)&&(!desco.getText().isEmpty())){
             String date=dateo.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
              FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une image");
@@ -206,6 +216,21 @@ public class OrdonnanceController implements Initializable {
    
            
      JOptionPane.showMessageDialog(null, " ordonnance ajouter ");
+     
+      Notifications notificationBuilder = Notifications.create()
+     .title("Ordonnance ajouter")
+     .text("ajout avec succes")
+             .graphic(null)
+             .hideAfter(Duration.seconds(5))
+             .position(Pos.TOP_RIGHT)
+             .onAction(new EventHandler<ActionEvent>()   {
+                @Override
+                public void handle(ActionEvent event) {
+                   System.out.println("clique ici");
+                }
+                 
+             });
+    notificationBuilder.showConfirm();
              
          colido.setCellValueFactory(new PropertyValueFactory<>("id"));
         colidco.setCellValueFactory(new PropertyValueFactory<>("consultation_id"));
@@ -219,6 +244,7 @@ public class OrdonnanceController implements Initializable {
            
              //tableo.setItems(list);
             tableo.setItems(list);
+            
            
            
 ido.setText(null);
@@ -233,6 +259,9 @@ ido.setText(null);
                         
            
         }   
+         else {
+           JOptionPane.showMessageDialog(null, " y a un ou des champs n'est pas valide ");
+        }
         }
         @FXML
     private void supprimer_ord(javafx.event.ActionEvent mouseEvent) throws SQLException {
@@ -364,11 +393,11 @@ if (result.get() == buttonTypeYes){
          label3.setText("Ajout   ");
 
         label3.setLayoutX(120);
-         // FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+          FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label3);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+         fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         ido.setEditable(false);
          conso.setEditable(true);
         dateo.setEditable(true);
@@ -403,11 +432,11 @@ if (result.get() == buttonTypeYes){
          label3.setText("Modifier   ");
 
         label3.setLayoutX(120);
-         // FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+          FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label3);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+         fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         ido.setEditable(false);
          conso.setEditable(true);
         dateo.setEditable(true);
@@ -442,11 +471,11 @@ if (result.get() == buttonTypeYes){
          label3.setText("Supprimer   ");
 
         label3.setLayoutX(120);
-         // FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+          FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label3);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+         fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         ido.setEditable(false);
          conso.setEditable(true);
         dateo.setEditable(true);
@@ -488,6 +517,7 @@ if ((desco .getText().matches("[0-9]")) || (desco .getText().length() == 0)) {
 
         } else if ((desco .getText().matches("[A-Z,a-z]"))) {
             desco .setStyle(null);
+             new animatefx.animation.Shake(desco ).play();
             erreur3.setText(null);
         }
    
@@ -505,6 +535,61 @@ if ((desco .getText().matches("[0-9]")) || (desco .getText().length() == 0)) {
     @FXML
     private void annuler2(ActionEvent event) {
     }
+    
+    @FXML
+    private void recherche() throws SQLException {
+          OrdonnanceCRUD sa = new OrdonnanceCRUD();
+     
+       colido.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colidco.setCellValueFactory(new PropertyValueFactory<>("consultation_id"));
+            coldo.setCellValueFactory(new PropertyValueFactory<>("date"));
+            coldeso.setCellValueFactory(new PropertyValueFactory<>("description"));
+            colimgo.setCellValueFactory(new PropertyValueFactory<>("image"));
+            
+           ObservableList<Ordonnance> list = sa.getOrdonnanceList();
+             tableo.setItems(list);
+        //ObservableList<Article> list = FXCollections.observableArrayList();
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Ordonnance> filteredData = new FilteredList<>(list, b -> true);
+        // 2. Set the filter Predicate whenever the filter changes.
+        trech.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate((Ordonnance rdv) -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (String.valueOf(rdv.getDescription()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                }
+                
+                else  if (String.valueOf(rdv.getId()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } 
+                
+                else if (String.valueOf(rdv.getDate()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } 
+               
+                else {
+                    return false; // Does not match.
+                }
+            });
+        });
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Ordonnance> sortedData = new SortedList<>(filteredData);
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        //  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(tableo.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tableo.setItems(sortedData);
+    }
+    
     }
     
        

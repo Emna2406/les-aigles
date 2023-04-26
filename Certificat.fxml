@@ -47,10 +47,12 @@
       <RadioButton fx:id="mdce" layoutX="881.0" layoutY="14.0" mnemonicParsing="false" onAction="#checkmodif" text="modifier" />
       <Label fx:id="erreur1" layoutX="160.0" layoutY="209.0" prefHeight="21.0" prefWidth="143.0" />
       <Label fx:id="label1" layoutX="159.0" layoutY="34.0" prefHeight="21.0" prefWidth="115.0" />
-      <Label alignment="TOP_CENTER" layoutX="92.0" layoutY="55.0" prefHeight="21.0" prefWidth="233.0" text="Certificat">
+      <Label alignment="TOP_CENTER" layoutX="92.0" layoutY="55.0" prefHeight="21.0" prefWidth="233.0" text="Certificat" textFill="#e42973">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="test" layoutX="689.0" layoutY="691.0" mnemonicParsing="false" onAction="#Performed" prefHeight="31.0" prefWidth="105.0" text="pdf" />
+      <TextField fx:id="trechh" layoutX="992.0" layoutY="9.0" onAction="#recherche" promptText="search" />
    </children>
 </AnchorPane>

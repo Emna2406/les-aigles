@@ -7,7 +7,9 @@ package edu.connexion3a41.gui;
 
 import edu.connexion3a41.entities.Certificat;
 import edu.connexion3a41.entities.Consultation;
+import edu.connexion3a41.entities.Ordonnance;
 import edu.connexion3a41.services.ConsultationCRUD;
+import edu.connexion3a41.services.OrdonnanceCRUD;
 import edu.connexion3a41.tools.MyDB;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -17,19 +19,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Duration;
+import javafx.util.Duration;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -49,7 +57,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -97,6 +113,10 @@ public class ConsultationController implements Initializable {
     private RadioButton mdc;
     @FXML
     private RadioButton sdc;
+    @FXML
+    private Button smis;
+    @FXML
+    private TextField ttrech;
 
     /**
      * Initializes the controller class.
@@ -247,6 +267,21 @@ public class ConsultationController implements Initializable {
    
            
      JOptionPane.showMessageDialog(null, " Consultation ajouter ");
+     
+      Notifications notificationBuilder = Notifications.create()
+     .title("Consultation ajouter")
+     .text("ajout avec succes")
+             .graphic(null)
+             .hideAfter(Duration.seconds(5))
+             .position(Pos.TOP_RIGHT)
+             .onAction(new EventHandler<ActionEvent>()   {
+                @Override
+                public void handle(ActionEvent event) {
+                   System.out.println("clique ici");
+                }
+                 
+             });
+    notificationBuilder.showConfirm();
              
             colidc.setCellValueFactory(new PropertyValueFactory<>("id"));
             colpc.setCellValueFactory(new PropertyValueFactory<>("patient_id"));
@@ -276,7 +311,7 @@ public class ConsultationController implements Initializable {
         }   
         }
         @FXML
-    private void supprimer_rdv(javafx.event.ActionEvent mouseEvent) throws SQLException {
+    private void supprimer_rdv(javafx.event.ActionEvent mouseEvent) throws SQLException, MessagingException {
          if (mouseEvent.getSource() == suppc) {
            
 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -304,7 +339,8 @@ if (result.get() == buttonTypeYes){
        
              ObservableList<Consultation> list = as.getConsultationList();
              tablec.setItems(list);
-         
+            int id=Integer.parseInt(idc.getText());
+            envoy(id);
            
            
 
@@ -318,6 +354,7 @@ if (result.get() == buttonTypeYes){
 
             datec.setValue(null);
             imgc.setText(null);
+         
     
 } else {
    colidc.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -329,7 +366,7 @@ if (result.get() == buttonTypeYes){
            
 }
 
-           
+          
            
 
         }
@@ -403,11 +440,11 @@ colidc.setCellValueFactory(new PropertyValueFactory<>("id"));
                   label2.setText("Ajout   ");
 
         label2.setLayoutX(120);
-         // FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+          FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label2);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+         fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         idc.setEditable(false);
          patientc.setEditable(true);
         medecinc.setEditable(true);
@@ -442,11 +479,11 @@ colidc.setCellValueFactory(new PropertyValueFactory<>("id"));
                     label2.setText("modifier   ");
 
         label2.setLayoutX(120);
-         // FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label2);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         idc.setEditable(false);
          patientc.setEditable(true);
         medecinc.setEditable(true);
@@ -481,11 +518,11 @@ colidc.setCellValueFactory(new PropertyValueFactory<>("id"));
                     label2.setText("Supprimer   ");
 
         label2.setLayoutX(120);
-     //     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label2);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+          FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label2);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+         fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         idc.setEditable(false);
          patientc.setEditable(true);
         medecinc.setEditable(true);
@@ -516,7 +553,7 @@ colidc.setCellValueFactory(new PropertyValueFactory<>("id"));
     private void Jump(ActionEvent event)throws IOException {
         
    
-         Parent root = FXMLLoader.load(getClass().getResource("Ordonnance.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Ordonnance.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Ordonnance");
@@ -526,5 +563,130 @@ colidc.setCellValueFactory(new PropertyValueFactory<>("id"));
     @FXML
     private void annuler1(ActionEvent event) {
     }
+
+    @FXML
+    private void gotostat(ActionEvent event) throws IOException {
+         Parent root = FXMLLoader.load(getClass().getResource("Stats.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("STATS");
+        stage.show();
+    }
+    
+    
+     private void envoy(int id) throws AddressException, MessagingException, javax.mail.MessagingException {
+         String from="mohamedabdelatif.aouadh@esprit.tn";
+       String password="201JMT3405";
+        String to="mohamedabdelatif.aouadh@esprit.tn";
+          String sujet="Suppression";
+            String message="la Consultation "+id+" a été supprimer";
+       String host="smtp.gmail.com";
+       
+       Properties props=System.getProperties();
+       props.put("mail.smtp.auth", true);
+       props.put("mail.smtp.starttls.enable", true);
+       props.put("mail.smtp.host", host);
+       props.put("mail.smtp.port", "587");
+           //Create a session with account credentials
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        });
+       
+           MimeMessage m=new MimeMessage(session);
+            m.setFrom(new InternetAddress(from));
+            m.addRecipient(MimeMessage.RecipientType.TO,new InternetAddress(to));
+            m.setSubject(sujet);
+            m.setText(message);
+           
+           
+            Transport.send(m);
+         
+             /* Message m=new MimeMessage(session);
+                m.setFrom(new InternetAddress(from));
+            m.addRecipient(MimeMessage.RecipientType.TO,new InternetAddress(to));
+            m.setSubject(subject.getText());
+            m.setText(msg.getText());
+            Transport.send(m);
+          */
+            //sentBoolValue.setVisible(true);
+            System.out.println("message envoyée");
+               JOptionPane.showMessageDialog(null, "Mail envoyée");
+    }
+
+    @FXML
+    private void jumpii(ActionEvent event) throws IOException {
+         Parent root = FXMLLoader.load(getClass().getResource("Mail.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Ordonnance");
+        stage.show();
+    }
+
+    @FXML
+    private void gotosms(ActionEvent event) throws IOException {
+         Parent root = FXMLLoader.load(getClass().getResource("Sms.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Sms");
+        stage.show();
+    }
+    
+    @FXML
+    private void recherche() throws SQLException {
+          ConsultationCRUD sa = new ConsultationCRUD();
+     
+       colidc.setCellValueFactory(new PropertyValueFactory<>("id"));
+            colpc.setCellValueFactory(new PropertyValueFactory<>("patient_id"));
+            colmc.setCellValueFactory(new PropertyValueFactory<>("medecin_id"));
+            coldc.setCellValueFactory(new PropertyValueFactory<>("datedeconsultation"));
+            colimgc.setCellValueFactory(new PropertyValueFactory<>("image"));
+            
+           ObservableList<Consultation> list = sa.getConsultationList();
+             tablec.setItems(list);
+        //ObservableList<Article> list = FXCollections.observableArrayList();
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Consultation> filteredData = new FilteredList<>(list, b -> true);
+        // 2. Set the filter Predicate whenever the filter changes.
+        ttrech.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate((Consultation rdv) -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (String.valueOf(rdv.getId()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                }
+                
+                else  if (String.valueOf(rdv.getPatient_id()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } 
+                
+               /* else if (String.valueOf(rdv.getDatedeconsultation()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } */
+               
+                else {
+                    return false; // Does not match.
+                }
+            });
+        });
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Consultation> sortedData = new SortedList<>(filteredData);
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        //  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(tablec.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tablec.setItems(sortedData);
+    }
+     
+     
     }
 
