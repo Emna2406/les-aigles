@@ -171,5 +171,6 @@ public class PartenaireCRUD implements EntityCRUD<Partenaire> {
 return myList;
 }
 
+
 }
 

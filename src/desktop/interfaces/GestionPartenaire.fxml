@@ -14,24 +14,24 @@
 <AnchorPane id="AnchorPane" prefHeight="585.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="desktop.interfaces.GestionPartenaireController">
    <children>
       <ButtonBar layoutX="112.0" layoutY="125.0" prefHeight="40.0" prefWidth="200.0" />
-      <Text fill="#ff3364" layoutX="39.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter partenaire" wrappingWidth="420.63671875" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="440.36328125">
+      <Text fill="#ff3364" layoutX="28.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter partenaire" wrappingWidth="420.63671875" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="451.36328125">
          <font>
             <Font name="Arial Black" size="33.0" />
          </font>
       </Text>
-      <Text layoutX="22.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
+      <Text layoutX="31.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
          <font>
             <Font name="Arial Black" size="22.0" />
          </font>
       </Text>
-      <TextField fx:id="emailField" layoutX="31.0" layoutY="265.0" prefHeight="40.0" prefWidth="282.0" />
-      <TextField fx:id="nomField" layoutX="31.0" layoutY="145.0" prefHeight="40.0" prefWidth="282.0" />
-      <Text layoutX="31.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+      <TextField fx:id="emailField" layoutX="31.0" layoutY="314.0" prefHeight="40.0" prefWidth="282.0" />
+      <TextField fx:id="nomField" layoutX="31.0" layoutY="188.0" prefHeight="40.0" prefWidth="282.0" />
+      <Text layoutX="48.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
          <font>
             <Font name="Arial Black" size="19.0" />
          </font>
       </Text>
-      <Pane layoutX="539.0" layoutY="30.0" prefHeight="330.0" prefWidth="264.0" style="-fx-border-color: #FDFEFE; -fx-background-color: #FF3364;">
+      <Pane layoutX="541.0" layoutY="79.0" prefHeight="275.0" prefWidth="264.0" style="-fx-border-color: #FDFEFE; -fx-background-color: #FF3364;">
          <children>
             <Button layoutX="47.0" layoutY="23.0" mnemonicParsing="false" onAction="#redirectToHomePage" prefHeight="40.0" prefWidth="171.0" text="Menu principal">
                <font>
@@ -55,13 +55,14 @@
             </Button>
          </children>
       </Pane>
-      <Separator layoutX="426.0" layoutY="43.0" orientation="VERTICAL" prefHeight="304.0" prefWidth="24.0" />
-      <TableView fx:id="partenaireTable" layoutX="31.0" layoutY="371.0" prefHeight="200.0" prefWidth="797.0">
+      <Separator layoutX="423.0" layoutY="64.0" orientation="VERTICAL" prefHeight="304.0" prefWidth="24.0" />
+      <TableView fx:id="partenaireTable" layoutX="28.0" layoutY="385.0" prefHeight="192.0" prefWidth="797.0">
         <columns>
           <TableColumn fx:id="idcol" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="nomcol" prefWidth="205.0" text="Nom" />
             <TableColumn fx:id="emailcol" prefWidth="516.0" text="Email" />
         </columns>
       </TableView>
+      <TextField fx:id="trecherche" layoutX="638.0" layoutY="20.0" onAction="#recherche" promptText="rechercher" />
    </children>
 </AnchorPane>

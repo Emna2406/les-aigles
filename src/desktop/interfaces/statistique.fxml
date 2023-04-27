@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StatistiqueController">
+    <BarChart fx:id="chart" layoutX="227.0" layoutY="97.0" prefHeight="408.0" prefWidth="628.0" title="Product Ratings">
+        <xAxis>
+            <CategoryAxis label="Product ID" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Rating" />
+        </yAxis>
+    </BarChart>
+   <Pane layoutY="93.0" prefHeight="508.0" prefWidth="200.0" style="-fx-background-color: #ff3364;">
+      <children>
+         <Pane layoutY="-94.0" prefHeight="91.0" prefWidth="900.0">
+            <children>
+               <ImageView fitHeight="91.0" fitWidth="275.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../img/santiana.jpg" />
+                  </image>
+               </ImageView>
+            </children>
+         </Pane>
+      </children>
+   </Pane>
+
+</AnchorPane>

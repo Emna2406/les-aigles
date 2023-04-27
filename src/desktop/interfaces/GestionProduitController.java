@@ -5,6 +5,7 @@
  */
 package desktop.interfaces;
 
+
 import desktop.entities.Produit;
 import desktop.services.ProduitCRUD;
 import desktop.tools.MailAPI;
@@ -46,7 +47,7 @@ public class GestionProduitController implements Initializable {
     private TableView<Produit> produitTable;
 
     private ObservableList<Produit> produitList;
-     @FXML
+    @FXML
     private TextField nomField;
     @FXML
     private Button btnadd;
@@ -66,7 +67,7 @@ public class GestionProduitController implements Initializable {
     private List<Produit> list_categorie;
     ProduitCRUD su = new ProduitCRUD();
     ObservableList<Produit> data;
-   
+    private TableColumn<Produit, Double> rateCol;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,6 +77,7 @@ public class GestionProduitController implements Initializable {
         idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomcol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         stockcol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+       
 
         produitTable.setItems(data);
 
@@ -95,6 +97,7 @@ public class GestionProduitController implements Initializable {
         idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomcol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         stockcol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+       
 
         produitTable.setItems(data);
 
@@ -113,35 +116,36 @@ public class GestionProduitController implements Initializable {
     @FXML
     private void addProduit(ActionEvent event) {
         {
-        try {
-        ProduitCRUD pc = new ProduitCRUD();
-        String nom = nomField.getText();
-        int stock = Integer.valueOf(stockField.getText());
-        if (nom.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("'Nom' must be inputed");
-            alert.setTitle("Problem");
-            alert.setHeaderText(null);
-            alert.showAndWait();
-        } else {
-            Produit p = new Produit(nom, stock);
-            pc.AddEntity(p);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("Added .");
-            alert.setHeaderText(null);
-            alert.show();
-            //redirectToListProduit();
-        }
-        
+            try {
+                ProduitCRUD pc = new ProduitCRUD();
+                String nom = nomField.getText();
+                int stock = Integer.valueOf(stockField.getText());
+              
+
+                if (nom.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("'Nom' must be inputed");
+                    alert.setTitle("Problem");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                } else {
+                    Produit p = new Produit(nom, stock);
+                    pc.AddEntity(p);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setContentText("Added .");
+                    alert.setHeaderText(null);
+                    alert.show();
+                    //redirectToListProduit();
+                }
+
                 MailAPI.sendMail("emna.baccar@esprit.tn", "Produit Ajouté", "Bravo, l'ajout du produit a été réussi ");
             } catch (MessagingException ex) {
                 Logger.getLogger(GestionPartenaireController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
 
-        refreshList();
-    }
+            refreshList();
+        }
     }
 
     @FXML
@@ -174,5 +178,21 @@ public class GestionProduitController implements Initializable {
             System.out.println(ex.getMessage() + ex.getStackTrace());
         }
     }
+    @FXML
+     public void consulterStat(ActionEvent event){
+      /*  try {
+            Parent root = FXMLLoader.load(getClass().getResource("statistique.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage() + ex.getStackTrace());
+        }*/
+     }
+
+   
+
+    
 
 }

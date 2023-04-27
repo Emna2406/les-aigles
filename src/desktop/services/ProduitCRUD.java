@@ -3,13 +3,17 @@ package desktop.services;
 import desktop.entities.Partenaire;
 import desktop.entities.Produit;
 import desktop.interfaces.EntityCRUD;
+import desktop.interfaces.GestionProduitController;
 import desktop.tools.MyConnection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -46,6 +50,9 @@ public class ProduitCRUD implements EntityCRUD<Produit> {
      */
     public ObservableList<Produit> listerProduits() {
         ObservableList<Produit> myList = FXCollections.observableArrayList();
+     
+         Connection cnx = MyConnection.getInstance().getCnx();
+        String reqq = "SELECT id from produit";
         try {
             String requete2 = "SELECT * FROM produit";
             Statement st = MyConnection.getInstance().getCnx().createStatement();
@@ -57,10 +64,12 @@ public class ProduitCRUD implements EntityCRUD<Produit> {
                 rec.setStock(rs.getInt("stock"));
                 myList.add(rec);
             }
+       
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return myList;
+   
     }
 
     /**

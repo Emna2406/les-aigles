@@ -13,17 +13,38 @@ public class Produit {
      private int id;
     private String nom;
     private int stock ;
+        private String nom_partenaire;
+
+    public Produit(String nom, int stock) {
+        this.nom = nom;
+        this.stock = stock;
+    }
 
     public Produit(int id, String nom, int stock) {
         this.id = id;
         this.nom = nom;
         this.stock = stock;
     }
+        
 
-    public Produit(String nom, int stock) {
+    public Produit(int id, String nom, int stock, String nom_partenaire) {
+        this.id = id;
         this.nom = nom;
         this.stock = stock;
+        this.nom_partenaire = nom_partenaire;
     }
+
+    public Produit(String nom, int stock, String nom_partenaire) {
+        this.nom = nom;
+        this.stock = stock;
+        this.nom_partenaire = nom_partenaire;
+    }
+
+
+  
+    
+
+  
 
     public Produit() {
     }
@@ -54,10 +75,20 @@ public class Produit {
         this.stock = stock;
     }
 
+    public String c() {
+        return nom_partenaire;
+    }
+
+    public void setNom_partenaire(String nom_partenaire) {
+        this.nom_partenaire = nom_partenaire;
+    }
+
     @Override
     public String toString() {
-        return "Produit{" + "id=" + id + ", nom=" + nom + ", stock=" + stock + '}';
+        return "Produit{" + "id=" + id + ", nom=" + nom + ", stock=" + stock + ", nom_partenaire=" + nom_partenaire + '}';
     }
+    
+
     
     
 }

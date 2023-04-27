@@ -10,12 +10,15 @@ import desktop.services.PartenaireCRUD;
 import desktop.tools.MailAPI;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,6 +66,8 @@ public class GestionPartenaireController implements Initializable {
     private List<Partenaire> list_categorie;
     PartenaireCRUD su = new PartenaireCRUD();
     ObservableList<Partenaire> data;
+    @FXML
+    private TextField trecherche;
 
     /**
      * Initializes the controller class.
@@ -113,35 +118,34 @@ public class GestionPartenaireController implements Initializable {
     @FXML
     private void addPartenairee(ActionEvent event) {
         {
-        try {
-        PartenaireCRUD pc = new PartenaireCRUD();
-        String nom = nomField.getText();
-        String email = emailField.getText();
-        
+            try {
+                PartenaireCRUD pc = new PartenaireCRUD();
+                String nom = nomField.getText();
+                String email = emailField.getText();
 
-        if (nom.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("'Nom' must be inputed");
-            alert.setTitle("Problem");
-            alert.setHeaderText(null);
-            alert.showAndWait();
-        } else if (email.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("'email' must be inputed");
-            alert.setTitle("Problem");
-            alert.setHeaderText(null);
-            alert.showAndWait();
-        } else {
-            Partenaire p = new Partenaire(nom, email);
-            pc.AddEntity(p);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("Added .");
-            alert.setHeaderText(null);
-            alert.show();
-            //redirectToListProduit();
-        }
-            
+                if (nom.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("'Nom' must be inputed");
+                    alert.setTitle("Problem");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                } else if (email.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("'email' must be inputed");
+                    alert.setTitle("Problem");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                } else {
+                    Partenaire p = new Partenaire(nom, email);
+                    pc.AddEntity(p);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setContentText("Added .");
+                    alert.setHeaderText(null);
+                    alert.show();
+                    //redirectToListProduit();
+                }
+
                 MailAPI.sendMail("emna.baccar@esprit.tn", "Partenaire Ajouté", "Bravo, l'ajout du partenaire a été réussi ");
             } catch (MessagingException ex) {
                 Logger.getLogger(GestionPartenaireController.class.getName()).log(Level.SEVERE, null, ex);
@@ -182,4 +186,77 @@ public class GestionPartenaireController implements Initializable {
         }
     }
 
+    @FXML
+    private void recherche(ActionEvent event) throws SQLException {
+           PartenaireCRUD sa = new PartenaireCRUD();
+
+        idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nomcol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+
+        emailcol.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        //appeler fx de recherche
+        ObservableList<Partenaire> list = sa.listerPartenaires();
+        partenaireTable.setItems(list);
+
+        //ObservableList<Article> list = FXCollections.observableArrayList();
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Partenaire> filteredData = new FilteredList<>(list, b -> true);
+        // 2. Set the filter Predicate whenever the filter changes.
+        trecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate((Partenaire part) -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (String.valueOf(part.getNom()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } else {
+                    return false; // Does not match.
+                }
+            });
+        });
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Partenaire> sortedData = new SortedList<>(filteredData);
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        //  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(partenaireTable.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        partenaireTable.setItems(sortedData);
+     
+
+
+      
+    }
+      /*  trecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue != null && (newValue.length() < oldValue.length())) {
+                  partenaireTable.setItems(data);
+            }
+            String value = newValue.toLowerCase();
+            ObservableList<Partenaire> subentries = FXCollections.observableArrayList();
+            for (Partenaire entry : partenaireTable.getItems()) {
+                boolean match = true;
+                
+                String nom = entry.getNom();
+            
+                String email = entry.getEmail();
+
+                if ( !nom.toLowerCase().contains(value)
+                        && !email.toLowerCase().contains(value)
+                       ) {
+                    match = false;
+                }
+                if (match) {
+                    subentries.add(entry);
+                }
+            }
+              partenaireTable.setItems(subentries);
+        });
+    
+ */
 }

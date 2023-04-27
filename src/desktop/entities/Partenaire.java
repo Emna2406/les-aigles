@@ -23,6 +23,7 @@ public class Partenaire {
     private int id;
     private String nom;
     private String email;
+    private String lien;
 
     public Partenaire(int id, String nom, String email) {
         this.id = id;
@@ -38,9 +39,11 @@ public class Partenaire {
     public Partenaire() {
     }
 
-    public Partenaire(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Partenaire(String lien) {
+        this.lien = lien;
     }
+
+  
 
     public Partenaire(int aInt, int aInt0, String string, String string0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -72,10 +75,21 @@ public class Partenaire {
         this.email = email;
     }
 
+    public String getLien() {
+        return lien;
+    }
+
+    public void setLien(String lien) {
+        this.lien = lien;
+    }
+
     @Override
     public String toString() {
-        return "Partenaire{" + "id=" + id + ", nom=" + nom + ", email=" + email + '}';
+        return "Partenaire{" + "id=" + id + ", nom=" + nom + ", email=" + email + ", lien=" + lien + '}';
     }
+    
+
+   
     
     
 }
