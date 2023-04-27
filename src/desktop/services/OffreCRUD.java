@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,13 +6,18 @@
  */
 package desktop.services;
 
+import desktop.entities.Candidat;
 import desktop.entities.Offre;
 import desktop.interfaces.EntityCRUD;
 import desktop.tools.MyConnection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -72,8 +78,60 @@ public class OffreCRUD implements EntityCRUD<Offre> {
         
     }
 
-    public List<Offre> display() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  public ObservableList<Offre> listerCandidats() {
+        ObservableList<Offre> myList = FXCollections.observableArrayList();
+        try {
+            
+            String requete2 = "Select * FROM Offre";
+            Statement st = MyConnection.getInstance().getCnx().createStatement();
+            ResultSet rs = st.executeQuery(requete2);
+            while (rs.next()) {
+               Offre rec = new Offre();
+                
+                rec.setId(rs.getInt("id"));
+                rec.setNbrplaces(rs.getInt("nbrplaces"));
+                rec.setDescription(rs.getString("description"));
+                rec.setIdservice(rs.getInt("Idservice"));
+
+                
+                myList.add(rec);
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            
+        }
+        return myList;
     }
 
+    @Override
+    public List<Offre> display() {
+        List<Offre> myList = new ArrayList();
+        try {
+            
+            String requete2 = "Select * FROM Offre";
+            Statement st = MyConnection.getInstance().getCnx().createStatement();
+            ResultSet rs = st.executeQuery(requete2);
+            while (rs.next()) {
+               Offre rec = new Offre();
+                
+                rec.setId(rs.getInt("id"));
+                rec.setNbrplaces(rs.getInt("nbrplaces"));
+                rec.setDescription(rs.getString("description"));
+                rec.setIdservice(rs.getInt("Idservice"));
+
+                
+                myList.add(rec);
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            
+        }
+        return myList;
+    }
 }
+
+    
+
+

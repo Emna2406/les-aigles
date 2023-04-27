@@ -8,6 +8,8 @@ package desktop.services;
 import desktop.entities.Candidat;
 import desktop.interfaces.EntityCRUD;
 import desktop.tools.MyConnection;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,22 +31,40 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
      *
      * @param p
      */
-    @Override
-     public void AddEntity(Candidat p) {
+    
+     public void AddEntity(Candidat p, File f) {
         try {
-            String requete1 = "INSERT INTO candidat (id,nom,prenom,email) VALUES(?,?,?,?)";
+            String requete1 = "INSERT INTO candidat (id,nom,prenom,cv,email) VALUES(?,?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete1);
             pst.setInt(1, p.getIdCand());
             pst.setString(2, p.getNom());
              pst.setString(3, p.getPrenom());
-            pst.setString(4, p.getEmail());
+             
+             FileReader fr = new FileReader(f);
+             pst.setCharacterStream(4, fr, (int)f.length());
+            pst.setString(5, p.getEmail());
             pst.executeUpdate();
             System.out.println("Bravo candidat ajouté !");
             
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
+     
+/*     public void addCv(File f)
+     {
+         try {
+            FileReader fr = new FileReader(f);
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement("update candidat set cv = ? where id = ?");
+            pst.setCharacterStream(1, fr, (int)f.length());
+            
+         }catch(Exception ex)
+         {
+             ex.printStackTrace();
+         }
+        
+         
+     }*/
     
     public ObservableList<Candidat> listerCandidats() {
         ObservableList<Candidat> myList = FXCollections.observableArrayList();
@@ -75,7 +95,7 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
     public void delete(Candidat p) {
         
         try {
-            String requete3 = "DELETE FROM candidat WHERE idCand=" + p.getIdCand();
+            String requete3 = "DELETE FROM candidat WHERE id=" + p.getIdCand();
             Statement st = MyConnection.getInstance().getCnx().createStatement();
             
             st.executeUpdate(requete3);
@@ -118,7 +138,7 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
     
     public void update(int idCand, Candidat r) {
         try {
-            String requete4 = "UPDATE candidat SET nom=?,prenom=? ,email=? WHERE idCand=?";
+            String requete4 = "UPDATE candidat SET nom=?,prenom=? ,email=? WHERE id=?";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete4);
             pst.setString(1, r.getNom());
             pst.setString(2, r.getPrenom());
@@ -163,5 +183,10 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
     
 return myList;
 }
+
+    @Override
+    public void AddEntity(Candidat t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

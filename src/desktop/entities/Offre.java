@@ -29,10 +29,18 @@ public class Offre {
         this.description = description;
         this.idservice = idservice;
     }
+
+    public Offre(String description, int nbrplaces, int idService) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     public int getId() {
         return id;
+    }
+    
+    public String getIdS() {
+        return Integer.toString(id);
     }
 
     public void setId(int id) {
@@ -41,6 +49,10 @@ public class Offre {
 
     public int getNbrplaces() {
         return nbrplaces;
+    }
+    
+    public String getNbrplacesS() {
+        return Integer.toString(nbrplaces);
     }
 
     public void setNbrplaces(int nbrplaces) {
@@ -57,6 +69,10 @@ public class Offre {
 
     public int getIdservice() {
         return idservice;
+    }
+    
+    public String getIdserviceS() {
+        return Integer.toString(nbrplaces);
     }
 
     public void setIdservice(int idservice) {

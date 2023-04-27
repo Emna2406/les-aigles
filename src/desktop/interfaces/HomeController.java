@@ -6,7 +6,10 @@
 package desktop.interfaces;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 /**
@@ -39,9 +43,22 @@ public class HomeController  {
     private Button offrebtn;
     @FXML
     private Button decbtn;
+    @FXML
+    private MenuButton langSelect;
 
-
+    /*   @FXML
+    EventHandler<ActionEvent> e = new EventHandler<ActionEvent>()
+    {
+            public void handle (ActionEvent e)
+            {
+                langSelect.setText(((MenuItem) e.getSource()).getText());
+            }
+     };*/
     
+    @FXML  
+    public void initialize(URL url, ResourceBundle rb) {
+        langSelect.setText("fr");
+    }    
 
     @FXML
     private void redirectToAddOffre(ActionEvent event) {

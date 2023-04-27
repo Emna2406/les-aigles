@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
@@ -94,5 +95,12 @@
             <Image url="@../../../../../../Downloads/328057188_489048406532157_5184760018258587774_n.jpg" />
          </image>
       </ImageView>
+      <Label layoutX="424.0" layoutY="39.0" text="Language" />
+      <MenuButton fx:id="langSelect" layoutX="491.0" layoutY="35.0" mnemonicParsing="false" text="English">
+        <items>
+          <MenuItem mnemonicParsing="false" text="English" />
+          <MenuItem mnemonicParsing="false" text="Français" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>
