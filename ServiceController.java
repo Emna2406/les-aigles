@@ -5,12 +5,18 @@
  */
 package edu.connexion3a41.gui;
 
+import static com.itextpdf.text.pdf.XfaXpathConstructor.XdpPackage.Pdf;
 import edu.connexion3a41.entities.Service;
+import edu.connexion3a41.entities.pdf;
 import edu.connexion3a41.services.ServiceS;
 
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.sql.SQLException;
 import static java.util.Collections.list;
@@ -18,17 +24,28 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.print.PrinterAttributes;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -42,6 +59,7 @@ import javafx.stage.FileChooser;
 import javax.swing.JOptionPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 /**
@@ -94,6 +112,10 @@ public class ServiceController implements Initializable {
     private Button annulerser;
     @FXML
     private Button btngotochambre;
+    @FXML
+    private TextField rechact;
+    @FXML
+    private ComboBox<String> ExporterListe;
 
 
       @FXML
@@ -246,6 +268,10 @@ public void initialize(URL url, ResourceBundle rb) {
     } catch (SQLException ex) {
         Logger.getLogger(ServiceController.class.getName()).log(Level.SEVERE, null, ex);
     }
+     ObservableList<String> list4 = FXCollections.observableArrayList("PDF", "Excel", "Imprimer");
+        ExporterListe.setItems(list4);
+        
+        tab_service.setStyle("-fx-background-color: red;");
 }
 
 
@@ -408,7 +434,7 @@ public void initialize(URL url, ResourceBundle rb) {
       
         
        
-                Parent root = FXMLLoader.load(getClass().getResource("chambre.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("reservation.fxml"));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.setTitle("clinique");
@@ -418,9 +444,53 @@ public void initialize(URL url, ResourceBundle rb) {
     
     }
 
-   
-     
+    @FXML
+    private void rechercheractivite()  throws IOException, SQLException {
+        ServiceS sa = new ServiceS();
+      col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+          col_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            col_descri.setCellValueFactory(new PropertyValueFactory<>("description"));
+            col_image.setCellValueFactory(new PropertyValueFactory<>("image"));
+          
+          
+       
+            ObservableList<Service> list = sa.getServiceList();
+            tab_service.setItems(list);
+        //ObservableList<Article> list = FXCollections.observableArrayList();
 
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Service> filteredData = new FilteredList<>(list, b -> true);
+        // 2. Set the filter Predicate whenever the filter changes.
+        rechact.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate((Service reglement) -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (String.valueOf(reglement.getNom()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } 
+               
+                else {
+                    return false; // Does not match.
+                }
+            });
+        });
+        // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Service> sortedData = new SortedList<>(filteredData);
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(tab_service.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tab_service.setItems(sortedData);
+        
+    }
+   
     }
     
 

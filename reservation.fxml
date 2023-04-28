@@ -7,45 +7,64 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="561.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.ReservationController">
+<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.ReservationController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0285f8" height="563.0" layoutY="-2.0" opacity="0.25" stroke="BLACK" strokeType="INSIDE" width="316.0" />
-      <Label fx:id="labelres" layoutX="25.0" layoutY="44.0" prefHeight="45.0" prefWidth="244.0" text="Reservation">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0285f8" height="634.0" layoutY="-2.0" opacity="0.25" stroke="BLACK" strokeType="INSIDE" width="316.0" />
+      <Label fx:id="labelres" layoutX="20.0" layoutY="124.0" prefHeight="45.0" prefWidth="244.0" text="Reservation">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
       <Label layoutX="25.0" layoutY="151.0" opacity="0.0" text="id" />
-      <Label layoutX="20.0" layoutY="247.0" text="id_patient" />
-      <Label layoutX="18.0" layoutY="201.0" text="id_chambre" />
-      <Label layoutX="21.0" layoutY="288.0" prefHeight="21.0" prefWidth="50.0" text="id_m" />
-      <Label layoutX="21.0" layoutY="330.0" text="date_deb" />
+      <Label layoutX="9.0" layoutY="247.0" prefHeight="21.0" prefWidth="77.0" text="Id_Patient" />
+      <Label layoutX="9.0" layoutY="201.0" prefHeight="21.0" prefWidth="89.0" text="Id_Chambre" />
+      <Label layoutX="7.0" layoutY="288.0" prefHeight="21.0" prefWidth="91.0" text="Id_Medecin" />
+      <Label layoutX="7.0" layoutY="330.0" prefHeight="21.0" prefWidth="77.0" text="Date_deb" />
       <TextField fx:id="id" layoutX="104.0" layoutY="146.0" opacity="0.0" />
       <TextField fx:id="idc" layoutX="104.0" layoutY="196.0" />
       <TextField fx:id="idp" layoutX="104.0" layoutY="242.0" />
       <TextField fx:id="idm" layoutX="104.0" layoutY="283.0" />
-      <DatePicker fx:id="datedeb" layoutX="89.0" layoutY="325.0" />
-      <Button fx:id="ajoutres" layoutX="39.0" layoutY="426.0" mnemonicParsing="false" onAction="#ajoutereservation" text="Ajouter" />
-      <Button fx:id="modres" layoutX="165.0" layoutY="426.0" mnemonicParsing="false" onAction="#modifiereservation" text="Modifier" />
-      <Button fx:id="suppres" layoutX="42.0" layoutY="474.0" mnemonicParsing="false" onAction="#supprimereservation" text="Supprimer" />
-      <Button fx:id="annuler" layoutX="158.0" layoutY="474.0" mnemonicParsing="false" onAction="#annuleres" text="Annuler" />
-      <TableView fx:id="tab_res" layoutX="373.0" layoutY="158.0" onMouseClicked="#getselected" prefHeight="200.0" prefWidth="378.0">
+      <DatePicker fx:id="datedeb" layoutX="101.0" layoutY="325.0" prefHeight="31.0" prefWidth="187.0" />
+      <Button fx:id="ajoutres" layoutX="39.0" layoutY="426.0" mnemonicParsing="false" onAction="#ajoutereservation" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #87CEEB;" text="Ajouter" />
+      <Button fx:id="modres" layoutX="160.0" layoutY="426.0" mnemonicParsing="false" onAction="#modifiereservation" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #87CEEB;" text="Modifier" />
+      <Button fx:id="suppres" layoutX="42.0" layoutY="474.0" mnemonicParsing="false" onAction="#supprimereservation" style="-fx-background-color: #87CEEB;" text="Supprimer" />
+      <Button fx:id="annuler" layoutX="159.0" layoutY="474.0" mnemonicParsing="false" onAction="#annuleres" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #87CEEB;" text="Annuler" />
+      <TableView fx:id="tab_res" layoutX="426.0" layoutY="209.0" onMouseClicked="#getselected" prefHeight="200.0" prefWidth="464.0" style="-fx-background-color: #87CEEB; -fx-border-color: #87CEEB;">
         <columns>
           <TableColumn fx:id="col_idc" prefWidth="75.0" text="id_c" />
           <TableColumn fx:id="col_ipd" prefWidth="75.0" text="id_p" />
             <TableColumn fx:id="col_idm" prefWidth="75.0" text="id_m" />
             <TableColumn fx:id="col_id" prefWidth="75.0" text="id" />
             <TableColumn fx:id="col_datedeb" prefWidth="75.0" text="date_deb" />
+            <TableColumn fx:id="col_prix" prefWidth="75.0" text="prix" />
         </columns>
       </TableView>
-      <RadioButton fx:id="radioajout" layoutX="335.0" layoutY="89.0" mnemonicParsing="false" onAction="#ajoutrchheck" text="Ajouter" />
-      <RadioButton fx:id="radiomodr" layoutX="450.0" layoutY="89.0" mnemonicParsing="false" onAction="#modifrchheck" text="Modifier" />
-      <RadioButton fx:id="radiosuppr" layoutX="567.0" layoutY="89.0" mnemonicParsing="false" onAction="#supprchheck" text="Supprimer" />
-      <RadioButton fx:id="radioconsultr" layoutX="683.0" layoutY="89.0" mnemonicParsing="false" onAction="#consulterchheck" text="Consulter" />
-      <Button fx:id="btngservice" layoutX="758.0" layoutY="14.0" mnemonicParsing="false" onAction="#gotoservice" text="go to service --&gt;" />
+      <RadioButton fx:id="radiomodr" layoutX="697.0" layoutY="151.0" mnemonicParsing="false" onAction="#modifrchheck" text="Modifier" />
+      <RadioButton fx:id="radiosuppr" layoutX="788.0" layoutY="151.0" mnemonicParsing="false" onAction="#supprchheck" text="Supprimer" />
+      <Button fx:id="btngservice" layoutX="859.0" layoutY="577.0" mnemonicParsing="false" onAction="#gotoservice" style="-fx-background-color: #87CEEB;" text="go to chambre --&gt;" />
+      <TextField fx:id="rechres" layoutX="418.0" layoutY="146.0" onAction="#recherchereservation" promptText="Search" />
+      <Button fx:id="stat" layoutX="533.0" layoutY="475.0" mnemonicParsing="false" onAction="#stat" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #87CEEB;" text="Statistique" />
+      <Button fx:id="mail" layoutX="701.0" layoutY="474.0" mnemonicParsing="false" onAction="#mail" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #87CEEB;" text="Envoyer mail" />
+      <Button fx:id="details" layoutX="533.0" layoutY="426.0" mnemonicParsing="false" onAction="#Detail" prefHeight="31.0" prefWidth="274.0" style="-fx-background-color: #87CEEB;" text="Terminer Reservation" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="114.0" layoutX="-2.0" stroke="#f8f8f8" strokeType="INSIDE" width="1027.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../image/logo.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="pdf" layoutX="533.0" layoutY="521.0" mnemonicParsing="false" onAction="#pdf" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #87CEEB;" text="PDF" />
+      <Button fx:id="imprimer" layoutX="701.0" layoutY="521.0" mnemonicParsing="false" onAction="#imprimer" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #87CEEB;" text="Imprimer" />
+      <ImageView fitHeight="31.0" fitWidth="41.0" layoutX="506.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="31.0" fitWidth="41.0" layoutX="617.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Downloads/logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

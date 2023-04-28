@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="desktop.interfaces.HomeController">
-   <children>
-      <ImageView fitHeight="580.0" fitWidth="841.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.MenuController">
+    <children>
+      <ImageView fitHeight="613.0" fitWidth="812.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Pictures/2%20(2).jpg" />
+            <Image url="@../../../../../../Downloads/back.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="25.0" layoutY="119.0" prefHeight="427.0" prefWidth="299.0" style="-fx-background-color: #F5B7B1;">
@@ -74,13 +74,7 @@
                   <Font name="Perpetua Titling MT Bold" size="15.0" />
                </font>
             </MenuButton>
-            <Button layoutX="85.0" layoutY="25.0" mnemonicParsing="false" text="Button" />
-            <Button fx:id="btnservice" layoutX="168.0" layoutY="25.0" mnemonicParsing="false" onAction="#gotoservice" text="service" textFill="#ff3364">
-               <font>
-                  <Font name="Perpetua Titling MT Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button layoutY="25.0" mnemonicParsing="false" text="Button" />
+            <Button fx:id="btnreservation" layoutX="21.0" layoutY="27.0" mnemonicParsing="false" onAction="#gestres" prefHeight="31.0" prefWidth="265.0" text="GESTION SERVICE" textFill="#ff3364" />
          </children>
       </Pane>
       <Separator blendMode="SRC_ATOP" layoutX="-1.0" layoutY="62.0" prefHeight="13.0" prefWidth="812.0">
@@ -89,11 +83,13 @@
          </padding>
       </Separator>
       <Pane layoutY="83.0" prefHeight="0.0" prefWidth="810.0" style="-fx-background-color: #FDFEFE;" />
-      <ImageView fitHeight="99.0" fitWidth="254.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="64.0" fitWidth="321.0" layoutX="25.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Downloads/santiana.jpg" />
+            <Image url="@../../../../../../Downloads/logo.jpg" />
          </image>
       </ImageView>
       <Button fx:id="decbtn" layoutX="661.0" layoutY="47.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" style="-fx-background-insets: #ff3364;" text="Se déconnecter" textFill="#ff3364" />
    </children>
+
+    
 </AnchorPane>

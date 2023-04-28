@@ -17,23 +17,26 @@ public class Reservation {
           private int id_patient;
             private int id_chambre ;
               private Date date_deb;
-                private Date dat_fin;
+              private String prix ;
+               
 
     public Date getDate_deb() {
         return date_deb;
+    }
+
+    public String getPrix() {
+        return prix;
+    }
+
+    public void setPrix(String prix) {
+        this.prix = prix;
     }
 
     public void setDate_deb(Date date_deb) {
         this.date_deb = date_deb;
     }
 
-    public Date getDat_fin() {
-        return dat_fin;
-    }
-
-    public void setDat_fin(Date dat_fin) {
-        this.dat_fin = dat_fin;
-    }
+   
 
     public int getId() {
         return id;
@@ -71,6 +74,13 @@ public class Reservation {
 
     public Reservation() {
     }
+    
+  public Reservation(int id_medecin, int id_patient, int id_chambre, Date date_deb) {
+        this.id_medecin = id_medecin;
+        this.id_patient = id_patient;
+        this.id_chambre = id_chambre;
+        this.date_deb = date_deb;
+    }
 
     public Reservation(int id, int id_medecin, int id_patient, int id_chambre, Date date_deb) {
         this.id = id;
@@ -80,18 +90,30 @@ public class Reservation {
         this.date_deb = date_deb;
     }
 
-    public Reservation(int id_medecin, int id_patient, int id_chambre, Date date_deb) {
+    public Reservation(int id, int id_medecin, int id_patient, int id_chambre, Date date_deb, String prix) {
+        this.id = id;
         this.id_medecin = id_medecin;
         this.id_patient = id_patient;
         this.id_chambre = id_chambre;
         this.date_deb = date_deb;
+        this.prix = prix;
+    }
+
+    public Reservation(int id_medecin, int id_patient, int id_chambre, Date date_deb, String prix) {
+        this.id_medecin = id_medecin;
+        this.id_patient = id_patient;
+        this.id_chambre = id_chambre;
+        this.date_deb = date_deb;
+        this.prix = prix;
     }
 
     @Override
     public String toString() {
-        return "Reservation{" + "id=" + id + ", id_medecin=" + id_medecin + ", id_patient=" + id_patient + ", id_chambre=" + id_chambre + ", date_deb=" + date_deb + '}';
+        return "Reservation{" + "id=" + id + ", id_medecin=" + id_medecin + ", id_patient=" + id_patient + ", id_chambre=" + id_chambre + ", date_deb=" + date_deb + ", prix=" + prix + '}';
     }
 
+  
+   
    
 
 }

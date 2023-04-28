@@ -22,7 +22,6 @@
       <TextField fx:id="num" layoutX="84.0" layoutY="234.0" onKeyPressed="#numvalid" />
       <TextField fx:id="cap" layoutX="84.0" layoutY="287.0" onKeyPressed="#capvalide" />
       <TextField fx:id="prix" layoutX="84.0" layoutY="356.0" onKeyPressed="#prixvalide" />
-      <TextField fx:id="etat" layoutX="84.0" layoutY="419.0" onKeyPressed="#etatvalid" />
       <TableView fx:id="tab_ch" layoutX="390.0" layoutY="221.0" onMouseClicked="#getselected" prefHeight="200.0" prefWidth="534.0">
         <columns>
           <TableColumn fx:id="col_id" prefWidth="75.0" text="id" />
@@ -45,9 +44,12 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <RadioButton fx:id="radioajoutc" layoutX="378.0" layoutY="165.0" mnemonicParsing="false" onAction="#ajoutccheck" text="Ajouter" />
-      <RadioButton fx:id="radiomodif" layoutX="502.0" layoutY="165.0" mnemonicParsing="false" onAction="#modifccheck" text="Modifier" />
-      <RadioButton fx:id="radiosuppc" layoutX="631.0" layoutY="165.0" mnemonicParsing="false" onAction="#suppccheck" text="Supprimer" />
-      <RadioButton fx:id="radiocconsulter" layoutX="755.0" layoutY="165.0" mnemonicParsing="false" onAction="#consulterccheck" text="Consulter" />
+      <RadioButton fx:id="radioajoutc" layoutX="599.0" layoutY="165.0" mnemonicParsing="false" onAction="#ajoutccheck" text="Ajouter" />
+      <RadioButton fx:id="radiomodif" layoutX="687.0" layoutY="165.0" mnemonicParsing="false" onAction="#modifccheck" text="Modifier" />
+      <RadioButton fx:id="radiosuppc" layoutX="783.0" layoutY="165.0" mnemonicParsing="false" onAction="#suppccheck" text="Supprimer" />
+      <RadioButton fx:id="radiocconsulter" layoutX="893.0" layoutY="165.0" mnemonicParsing="false" onAction="#consulterccheck" text="Consulter" />
+      <RadioButton fx:id="disponibleRadio" layoutX="67.0" layoutY="424.0" mnemonicParsing="false" text="Disponible" />
+      <RadioButton fx:id="nonDispoRadio" layoutX="197.0" layoutY="424.0" mnemonicParsing="false" text="non disponible" />
+      <TextField fx:id="recham" layoutX="390.0" layoutY="165.0" onAction="#rechercherchambre" promptText="Search" />
    </children>
 </AnchorPane>

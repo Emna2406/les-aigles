@@ -6,15 +6,22 @@
 package edu.connexion3a41.gui;
 
 import edu.connexion3a41.entities.Chambre;
+import edu.connexion3a41.entities.Service;
 import edu.connexion3a41.services.ChambreService;
+import edu.connexion3a41.services.ServiceS;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -24,10 +31,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 import javax.swing.JOptionPane;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -42,7 +52,6 @@ public class ChambreController implements Initializable {
     private TextField cap;
     @FXML
     private TextField prix;
-    @FXML
     private TextField etat;
     @FXML
     private TableView<Chambre> tab_ch;
@@ -84,6 +93,13 @@ public class ChambreController implements Initializable {
     private RadioButton radiosuppc;
     @FXML
     private RadioButton radiocconsulter;
+    @FXML
+    private RadioButton disponibleRadio;
+    @FXML
+    private RadioButton nonDispoRadio;
+   // private ToggleGroup etatGroup;
+    @FXML
+    private TextField recham;
 
     /**
      * Initializes the controller class.
@@ -106,6 +122,9 @@ public class ChambreController implements Initializable {
          } catch (SQLException ex) {
           
         }
+        /*  etatGroup = new ToggleGroup();
+disponibleRadio.setToggleGroup(etatGroup);
+nonDispoRadio.setToggleGroup(etatGroup);*/
          
     }    
 
@@ -122,10 +141,32 @@ public class ChambreController implements Initializable {
             JOptionPane.showMessageDialog(null, "Une chambre avec le même numéro existe déjà!");
             return; // Sortir de la méthode sans rien ajouter
         }
+ String etat;
+        if (disponibleRadio.isSelected()) {
+            etat = "disponible";
+        } else {
+            etat = "non disponible";
+        }
 
-        as.ajouter(new Chambre(num.getText(),cap.getText(),prix.getText(),etat.getText()));
+        as.ajouter(new Chambre(num.getText(),cap.getText(),prix.getText(),etat));
         JOptionPane.showMessageDialog(null, "Chambre ajoutée!");
-
+  //notifier
+    
+     
+     Notifications notificationBuilder = Notifications.create()
+     .title("chambre ajouter")
+     .text("ajout avec succes")
+             .graphic(null)
+             .hideAfter(Duration.seconds(5))
+             .position(Pos.TOP_RIGHT)
+             .onAction(new EventHandler<ActionEvent>()   {
+                @Override
+                public void handle(ActionEvent event) {
+                   System.out.println("clique ici");
+                }
+                 
+             });
+    notificationBuilder.showConfirm();
         col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_num.setCellValueFactory(new PropertyValueFactory<>("num"));
         col_cap.setCellValueFactory(new PropertyValueFactory<>("capacite"));
@@ -139,7 +180,45 @@ public class ChambreController implements Initializable {
         num.setText(null);
         cap.setText(null);
         prix.setText(null);
-        etat.setText(null);
+      disponibleRadio.setSelected(false);
+nonDispoRadio.setSelected(false);
+    }
+}
+ @FXML
+private void modifierchambre(javafx.event.ActionEvent mouseEvent) throws SQLException{
+    if (mouseEvent.getSource() == modch) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Voulez-vous vraiment modifier cette chambre ?");
+        alert.setContentText("Cliquez sur OK pour confirmer.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            ChambreService as = new ChambreService();
+             String etat;
+        if (disponibleRadio.isSelected()) {
+            etat = "disponible";
+        } else {
+            etat = "non disponible";
+        }
+            as.modifier(new Chambre(Integer.parseInt(id.getText()),num.getText(),cap.getText(),prix.getText(),etat));
+            JOptionPane.showMessageDialog(null, "activite Modifiée");
+
+            col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            col_num.setCellValueFactory(new PropertyValueFactory<>("num "));
+            col_cap.setCellValueFactory(new PropertyValueFactory<>("capacite"));
+            col_prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+            col_etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+            ObservableList<Chambre> list = as.getChambreList();
+            tab_ch.setItems(list);
+            id.setText(null);
+            num.setText(null);
+            cap.setText(null);
+            prix.setText(null);
+             disponibleRadio.setSelected(false);
+nonDispoRadio.setSelected(false);
+        }
     }
 }
 
@@ -159,9 +238,12 @@ public class ChambreController implements Initializable {
           num.setText(col_num.getCellData(index).toString());
           cap.setText(col_cap.getCellData(index).toString());
           prix.setText(col_prix.getCellData(index).toString());
-           etat.setText(col_etat.getCellData(index).toString());
-          //  idser.setText(col_idser.getCellData(index).toString());
-           
+           String selectedEtat = col_etat.getCellData(index).toString();
+    if(selectedEtat.equals("Disponible")){
+        disponibleRadio.setSelected(true);
+    } else if(selectedEtat.equals("Non disponible")){
+        nonDispoRadio.setSelected(true);
+    }
     }
 
     @FXML
@@ -192,37 +274,7 @@ public class ChambreController implements Initializable {
         
     }
 
-    @FXML
-private void modifierchambre(javafx.event.ActionEvent mouseEvent) throws SQLException{
-    if (mouseEvent.getSource() == modch) {
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText("Voulez-vous vraiment modifier cette chambre ?");
-        alert.setContentText("Cliquez sur OK pour confirmer.");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            ChambreService as = new ChambreService();
-            as.modifier(new Chambre(Integer.parseInt(id.getText()),num.getText(),cap.getText(),prix.getText(),etat.getText()));
-            JOptionPane.showMessageDialog(null, "activite Modifiée");
-
-            col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            col_num.setCellValueFactory(new PropertyValueFactory<>("num "));
-            col_cap.setCellValueFactory(new PropertyValueFactory<>("capacite"));
-            col_prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
-            col_etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
-            ObservableList<Chambre> list = as.getChambreList();
-            tab_ch.setItems(list);
-            id.setText(null);
-            num.setText(null);
-            cap.setText(null);
-            prix.setText(null);
-            etat.setText(null);
-        }
-    }
-}
-
+   
 
     @FXML
     private void numvalid(KeyEvent event) {
@@ -267,7 +319,6 @@ private void modifierchambre(javafx.event.ActionEvent mouseEvent) throws SQLExce
     }
     }
 
-    @FXML
     private void etatvalid(KeyEvent event) {
           if (etat.getText().isEmpty()) {
         etat.setStyle("-fx-border-color:red ; -fx-border-width:2px;");
@@ -418,6 +469,52 @@ private void modifierchambre(javafx.event.ActionEvent mouseEvent) throws SQLExce
             prix.setText(null);
             cap.setText(null);
              etat.setText(null);
+    }
+
+    @FXML
+    private void rechercherchambre()  throws IOException, SQLException{
+         ChambreService sa = new ChambreService();
+      col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_num.setCellValueFactory(new PropertyValueFactory<>("num"));
+        col_cap.setCellValueFactory(new PropertyValueFactory<>("capacite"));
+        col_prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        col_etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+          
+       
+            ObservableList<Chambre> list = sa.getChambreList();
+            tab_ch.setItems(list);
+        //ObservableList<Article> list = FXCollections.observableArrayList();
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Chambre> filteredData = new FilteredList<>(list, b -> true);
+        // 2. Set the filter Predicate whenever the filter changes.
+        recham.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate((Chambre reglement) -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (String.valueOf(reglement.getNum()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } 
+               
+                else {
+                    return false; // Does not match.
+                }
+            });
+        });
+        // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Chambre> sortedData = new SortedList<>(filteredData);
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(tab_ch.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tab_ch.setItems(sortedData);
     }
 }
 
