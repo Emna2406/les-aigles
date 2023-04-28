@@ -5,16 +5,36 @@
  */
 package edu.connexion3a41.gui;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import edu.connexion3a41.entities.Certificat;
 import edu.connexion3a41.entities.Consultation;
+import edu.connexion3a41.entities.Ordonnance;
 import edu.connexion3a41.services.CertificatCRUD;
 import edu.connexion3a41.services.ConsultationCRUD;
+import edu.connexion3a41.services.OrdonnanceCRUD;
+import edu.connexion3a41.tools.MyDB;
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Duration;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -23,12 +43,17 @@ import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import static javafx.scene.control.ContentDisplay.CENTER;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -40,7 +65,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javax.management.Notification;
 import javax.swing.JOptionPane;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+
 
 /**
  * FXML Controller class
@@ -83,7 +112,8 @@ public class CertificatController implements Initializable {
     private Button modcert;
     @FXML
     private Button suppcert;
-    private DatePicker test;
+    @FXML
+    private Button test;
     private DatePicker test2;
     @FXML
     private Label erreur2;
@@ -97,6 +127,8 @@ public class CertificatController implements Initializable {
     private RadioButton sdce;
     @FXML
     private RadioButton mdce;
+    @FXML
+    private TextField trechh;
 
     /**
      * Initializes the controller class.
@@ -151,7 +183,7 @@ public class CertificatController implements Initializable {
     
     @FXML
      private void ajoutcert(javafx.event.ActionEvent mouseEvent)throws SQLException {
-        if (mouseEvent.getSource() ==ajtcert){
+        if ((mouseEvent.getSource() ==ajtcert)&&(!patcert.getText().isEmpty())&&(!medcert.getText().isEmpty())){
             String date=ddcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String datee=dfcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             FileChooser fileChooser = new FileChooser();
@@ -163,11 +195,28 @@ public class CertificatController implements Initializable {
             as.ajouter(new Certificat(Integer.parseInt(patcert.getText()),Integer.parseInt(medcert.getText()),date,datee,imagePath));
            
        
-         
+            //notifier
+    JOptionPane.showMessageDialog(null, " Certficat ajouter ");
+     
+     Notifications notificationBuilder = Notifications.create()
+     .title("Certificat ajouter")
+     .text("ajout avec succes")
+             .graphic(null)
+             .hideAfter(Duration.seconds(5))
+             .position(Pos.TOP_RIGHT)
+             .onAction(new EventHandler<ActionEvent>()   {
+                @Override
+                public void handle(ActionEvent event) {
+                   System.out.println("clique ici");
+                }
+                 
+             });
+    notificationBuilder.showConfirm();
+   
        
    
            
-     JOptionPane.showMessageDialog(null, " Certficat ajouter ");
+     
              
            colidcert.setCellValueFactory(new PropertyValueFactory<>("id"));
         colidpcert.setCellValueFactory(new PropertyValueFactory<>("patient_id"));
@@ -195,7 +244,10 @@ idcert.setText(null);
      imgcert.setText(null);
                         
            
-        }   
+        } 
+        else {
+           JOptionPane.showMessageDialog(null, " y a un ou des champs n'est pas valide ");
+        }
         }
         @FXML
     private void supprimer_cert(javafx.event.ActionEvent mouseEvent) throws SQLException {
@@ -379,11 +431,11 @@ if ((patcert .getText().matches("[0-9]")) || (patcert .getText().length() == 0))
           label1.setText("Ajout   ");
 
         label1.setLayoutX(120);
-         // FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+          FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+         fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         idcert.setEditable(false);
          patcert.setEditable(true);
         medcert.setEditable(true);
@@ -421,11 +473,11 @@ if ((patcert .getText().matches("[0-9]")) || (patcert .getText().length() == 0))
        label1.setText("supprimer   ");
 
         label1.setLayoutX(120);
-         // FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+          FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+         fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         idcert.setEditable(false);
          patcert.setEditable(true);
         medcert.setEditable(true);
@@ -453,6 +505,7 @@ if ((patcert .getText().matches("[0-9]")) || (patcert .getText().length() == 0))
             ddcert.setValue(null);
             dfcert.setValue(null);
      imgcert.setText(null);
+
                         
     }
 
@@ -461,11 +514,11 @@ if ((patcert .getText().matches("[0-9]")) || (patcert .getText().length() == 0))
         label1.setText("modifier   ");
 
         label1.setLayoutX(120);
-         // FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
-       // fadeTransition.setFromValue(1.0);
-       // fadeTransition.setToValue(0.0);
-       //  fadeTransition.setCycleCount(Animation.INDEFINITE);
-        //fadeTransition.play();
+          FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), label1);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+         fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
         idcert.setEditable(false);
          patcert.setEditable(true);
         medcert.setEditable(true);
@@ -498,8 +551,171 @@ if ((patcert .getText().matches("[0-9]")) || (patcert .getText().length() == 0))
 
     @FXML
     private void annuler3(ActionEvent event) {
+         idcert.setText(null);
+            patcert.setText(null);
+
+           
+            medcert.setText(null);
+            ddcert.setValue(null);
+            dfcert.setValue(null);
+     imgcert.setText(null);
     }
+
+    @FXML
+    private void Performed(ActionEvent event) throws IOException {
+        Document doc=new Document();
+         Connection cnx = MyDB.getInstance().getConnexion();
+        String sql ="Select * from certificat";
         
+        
+        try{
+             PreparedStatement pst = cnx.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        PdfWriter.getInstance(doc,new FileOutputStream("C:\\Users\\bejao\\Desktop\\testt.pdf"));
+        doc.open();
+       // Image img = new Image("C:\\Users\\bejao\\Desktop\\testt.pdf");
+      // img.scaleAbsoluteWidth(600);
+       // img.scaleAbsoluteHeight(92);
+       // img.setAligment(Image.ALIGN_CENTRE);
+       
+       
+        doc.add(new Paragraph(" "));
+        doc.add(new Paragraph("---------------------------------------------------"));
+        doc.add(new Paragraph("Liste des Certificats : "));
+        doc.add(new Paragraph("---------------------------------------------------"));
+        doc.add(new Paragraph(" "));
+         doc.add(new Paragraph(" "));
+          doc.add(new Paragraph(" "));
+           doc.add(new Paragraph(" "));
+        
+        PdfPTable table = new PdfPTable(6);
+        table.setWidthPercentage(100);
+        PdfPCell cell ;
+        
+        
+        cell=new PdfPCell (new Phrase ("id_patient", FontFactory.getFont("comic Sans MS",12)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(BaseColor.GRAY);
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase ("id_medecin", FontFactory.getFont("comic Sans MS",12)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(BaseColor.GRAY);
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase ("date_debut", FontFactory.getFont("comic Sans MS",12)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(BaseColor.GRAY);
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase ("date_fin", FontFactory.getFont("comic Sans MS",12)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(BaseColor.GRAY);
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase ("image", FontFactory.getFont("comic Sans MS",12)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(BaseColor.GRAY);
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase ("id", FontFactory.getFont("comic Sans MS",12)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(BaseColor.GRAY);
+        table.addCell(cell);
+        ////////////////////////////////////////////////////////////////////////////
+        while (rs.next()){
+         cell=new PdfPCell (new Phrase (rs.getString("patient_id").toString(), FontFactory.getFont("Arial",11)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase (rs.getString("medecin_id").toString(), FontFactory.getFont("Arial",11)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase (rs.getString("datedeb").toString(), FontFactory.getFont("Arial",11)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase (rs.getString("datefin").toString(), FontFactory.getFont("Arial",11)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase (rs.getString("image").toString(), FontFactory.getFont("Arial",11)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        
+        table.addCell(cell);
+        cell=new PdfPCell (new Phrase (rs.getString("id").toString(), FontFactory.getFont("Arial",11)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+       
+        table.addCell(cell);}
+        
+        doc.add(table);
+        
+        doc.close();
+        Desktop.getDesktop().open(new File ("C:\\Users\\bejao\\Desktop\\testt.pdf"));
+    }   catch (FileNotFoundException ex) {
+            Logger.getLogger(CertificatController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(CertificatController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CertificatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      
+    @FXML
+    private void recherche() throws SQLException {
+          CertificatCRUD sa = new CertificatCRUD();
+     
+       colidcert.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colidpcert.setCellValueFactory(new PropertyValueFactory<>("patient_id"));
+            colidmcert.setCellValueFactory(new PropertyValueFactory<>("medecin_id"));
+            colddcert.setCellValueFactory(new PropertyValueFactory<>("datedeb"));
+            coldfcert.setCellValueFactory(new PropertyValueFactory<>("datefin"));
+            colimgcert.setCellValueFactory(new PropertyValueFactory<>("image"));
+         
+            
+           ObservableList<Certificat> list = sa.getCertificatList();
+             tablecert.setItems(list);
+        //ObservableList<Article> list = FXCollections.observableArrayList();
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Certificat> filteredData = new FilteredList<>(list, b -> true);
+        // 2. Set the filter Predicate whenever the filter changes.
+        trechh.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate((Certificat rdv) -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (String.valueOf(rdv.getPatient_id()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                }
+                
+                else  if (String.valueOf(rdv.getId()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } 
+                
+              /*  else if (String.valueOf(rdv.getDatedeb()).indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches libelle
+                } */
+               
+                else {
+                    return false; // Does not match.
+                }
+            });
+        });
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Certificat> sortedData = new SortedList<>(filteredData);
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        //  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(tablecert.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tablecert.setItems(sortedData);
+    }
+    
+    
+    
+    
     }
 
   

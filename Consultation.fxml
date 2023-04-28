@@ -8,14 +8,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="723.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.ConsultationController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7ab4eb" height="724.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="402.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8dbfee" height="293.0" layoutX="-2.0" layoutY="431.0" stroke="BLACK" strokeType="INSIDE" width="1005.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0285f8" height="724.0" layoutY="-1.0" opacity="0.25" stroke="BLACK" strokeType="INSIDE" width="402.0" />
       <Label layoutX="14.0" layoutY="166.0" prefHeight="21.0" prefWidth="89.0" text="id_patient :" textAlignment="RIGHT" />
       <Label layoutX="15.0" layoutY="390.0" text="image :" />
       <Label layoutX="17.0" layoutY="228.0" text="id_medecin :" />
@@ -44,7 +45,7 @@
       <RadioButton fx:id="sdc" layoutX="673.0" layoutY="12.0" mnemonicParsing="false" onAction="#checksuppr1" text="supprimer" />
       <Label fx:id="label2" layoutX="16.0" layoutY="39.0" prefHeight="21.0" prefWidth="77.0" />
       <Button layoutX="857.0" layoutY="18.0" mnemonicParsing="false" onAction="#Jump" text="Go to Ord--&gt;" />
-      <Label layoutX="177.0" layoutY="16.0" text="Consultation" textFill="#e42973">
+      <Label layoutX="160.0" layoutY="87.0" text="Consultation" textFill="#e42973">
          <font>
             <Font size="24.0" />
          </font>
@@ -53,5 +54,10 @@
       <Button layoutX="792.0" layoutY="569.0" mnemonicParsing="false" onAction="#jumpii" text="Envoyer un Mail" />
       <Button fx:id="smis" layoutX="163.0" layoutY="569.0" mnemonicParsing="false" onAction="#gotosms" prefHeight="31.0" prefWidth="89.0" text="Sms" />
       <TextField fx:id="ttrech" layoutX="595.0" layoutY="34.0" onAction="#recherche" promptText="Search" />
+      <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="108.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

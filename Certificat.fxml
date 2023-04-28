@@ -7,14 +7,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="785.0" prefWidth="1192.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.CertificatController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ab9e4" height="229.0" layoutX="393.0" layoutY="556.0" stroke="BLACK" strokeType="INSIDE" width="799.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8fc2f2" height="785.0" stroke="BLACK" strokeType="INSIDE" width="393.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0285f8" height="785.0" opacity="0.25" stroke="BLACK" strokeType="INSIDE" width="393.0" />
       <Label layoutX="53.0" layoutY="77.0" opacity="0.0" text="id" />
       <Label layoutX="53.0" layoutY="161.0" text="patient_id" />
       <Label layoutX="53.0" layoutY="253.0" text="medecin_id" />
@@ -46,13 +47,18 @@
       <RadioButton fx:id="sdce" layoutX="707.0" layoutY="14.0" mnemonicParsing="false" onAction="#checksuppr" text="supprimer" />
       <RadioButton fx:id="mdce" layoutX="881.0" layoutY="14.0" mnemonicParsing="false" onAction="#checkmodif" text="modifier" />
       <Label fx:id="erreur1" layoutX="160.0" layoutY="209.0" prefHeight="21.0" prefWidth="143.0" />
-      <Label fx:id="label1" layoutX="159.0" layoutY="34.0" prefHeight="21.0" prefWidth="115.0" />
-      <Label alignment="TOP_CENTER" layoutX="92.0" layoutY="55.0" prefHeight="21.0" prefWidth="233.0" text="Certificat" textFill="#e42973">
+      <Label fx:id="label1" layoutX="272.0" layoutY="51.0" prefHeight="21.0" prefWidth="115.0" />
+      <Label alignment="TOP_CENTER" layoutX="115.0" layoutY="98.0" prefHeight="21.0" prefWidth="233.0" text="Certificat" textFill="#e42973">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
       <Button fx:id="test" layoutX="689.0" layoutY="691.0" mnemonicParsing="false" onAction="#Performed" prefHeight="31.0" prefWidth="105.0" text="pdf" />
       <TextField fx:id="trechh" layoutX="992.0" layoutY="9.0" onAction="#recherche" promptText="search" />
+      <ImageView fitHeight="85.0" fitWidth="200.0" layoutX="115.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
