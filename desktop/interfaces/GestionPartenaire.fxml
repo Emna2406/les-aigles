@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1266.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="desktop.interfaces.GestionPartenaireController">
+   <children>
+      <TextField fx:id="trecherche" layoutX="321.0" layoutY="23.0" onAction="#recherche" promptText="rechercher" />
+      <ImageView fitHeight="31.0" fitWidth="24.0" layoutX="474.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/chercher.gif" />
+         </image>
+      </ImageView>
+      <Pane layoutX="16.0" layoutY="403.0" prefHeight="225.0" prefWidth="187.0" style="-fx-background-color: #D6EAF8;">
+         <children>
+            <Button fx:id="btnupdate" alignment="BASELINE_LEFT" layoutX="4.0" layoutY="89.0" mnemonicParsing="false" onAction="#updatePartenaire" prefHeight="47.0" prefWidth="168.0" style="-fx-background-color: #fdfefe;" text="Modifier" textFill="#ff3364">
+               <font>
+                  <Font name="Arial Black" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnadd" alignment="BASELINE_LEFT" layoutX="4.0" layoutY="14.0" mnemonicParsing="false" onAction="#addPartenairee" prefHeight="47.0" prefWidth="168.0" style="-fx-background-color: #fdfefe#fdfefe;" text="Ajouter" textFill="#ff3364">
+               <font>
+                  <Font name="Arial Black" size="20.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="119.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/plus.gif" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="119.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/tourner.gif" />
+               </image>
+            </ImageView>
+            <Button fx:id="btndelete" alignment="BASELINE_LEFT" layoutX="3.0" layoutY="162.0" mnemonicParsing="false" onAction="#deletePartenaire" prefHeight="52.0" prefWidth="168.0" style="-fx-background-color: #fdfefe;" text="Supprimer" textFill="#ff3364">
+               <font>
+                  <Font name="Arial Black" size="17.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="121.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/moins.gif" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="580.0" fitWidth="1020.0" layoutX="254.0" layoutY="69.0" opacity="0.87" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/flat-lay-health-still-life-arrangement-with-copy-space.jpg" />
+         </image>
+         <effect>
+            <Glow />
+         </effect>
+      </ImageView>
+      <Text fill="#ff3364" layoutX="28.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter partenaire" wrappingWidth="249.31917929649353" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="989.0">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="emailField" layoutX="9.0" layoutY="340.0" prefHeight="40.0" prefWidth="242.0" promptText="EMAIL" />
+      <TextField fx:id="nomField" layoutX="7.0" layoutY="271.0" prefHeight="40.0" prefWidth="242.0" promptText="NOM" />
+      <Separator layoutX="242.0" layoutY="68.0" orientation="VERTICAL" prefHeight="570.0" prefWidth="24.0" />
+      <TableView fx:id="partenaireTable" layoutX="718.0" layoutY="121.0" prefHeight="416.0" prefWidth="526.0">
+        <columns>
+          <TableColumn fx:id="idcol" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="nomcol" prefWidth="185.0" text="Nom" />
+            <TableColumn fx:id="emailcol" prefWidth="265.0" text="Email" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="63.0" fitWidth="292.0" layoutX="5.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/santiana.jpg" />
+         </image>
+      </ImageView>
+      <Separator layoutX="5.0" layoutY="68.0" prefHeight="0.0" prefWidth="1259.0" />
+      <Button fx:id="MenuPrincipal" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="95.0" mnemonicParsing="false" onAction="#redirectToHomePage" prefHeight="47.0" prefWidth="227.0" style="-fx-background-color: #fdfefe;" stylesheets="@style.css" text="Menu principal" textFill="#ff3364">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="40.0" fitWidth="47.0" layoutX="191.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/menu.gif" />
+         </image>
+      </ImageView>
+      <Separator layoutX="9.0" layoutY="166.0" prefHeight="3.0" prefWidth="242.0" />
+   </children>
+</AnchorPane>

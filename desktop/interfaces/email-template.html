@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Product Added</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+        }
+        .container {
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #FFFFFF;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #10165F;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #666666;
+        }
+        .button {
+            display: inline-block;
+            background-color: #10165F;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #05071F;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Added</h1>
+        <p>Congratulations, the product <strong>{{PRODUCT_NAME}}</strong> with a stock of <strong>{{PRODUCT_STOCK}}</strong> has been successfully added.</p>
+        <p>Thank you for your business.</p>
+        <a href="#" class="button">View Products</a>
+    </div>
+</body>
+</html>

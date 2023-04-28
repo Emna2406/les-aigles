@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="desktop.interfaces.CheckPartenaireController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="482.0" prefWidth="907.0" style="-fx-background-color: #fdfefe;">
+         <children>
+            <ImageView fitHeight="525.0" fitWidth="907.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/flat-lay-health-still-life-arrangement-with-copy-space.jpg" />
+               </image>
+            </ImageView>
+<ImageView fx:id="qrCodeImageView" fitHeight="231.0" fitWidth="266.0" layoutX="487.0" layoutY="280.0" />
+            <ImageView fx:id="qrCodeImageView1" fitHeight="143.0" fitWidth="158.0" layoutX="235.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="78.0" fitWidth="308.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/santiana.jpg" />
+               </image>
+            </ImageView>
+            <Button alignment="BASELINE_LEFT" layoutX="701.0" layoutY="27.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="189.0" style="-fx-background-color: #fdfefe;" text="SE DECONNECTER" textFill="#ff3364">
+               <font>
+                  <Font name="Arial" size="11.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/connexion.gif" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator layoutX="682.0" orientation="VERTICAL" prefHeight="91.0" prefWidth="5.0" />
+            <Separator layoutX="676.0" orientation="VERTICAL" prefHeight="91.0" prefWidth="5.0" />
+            <Separator layoutY="89.0" prefHeight="2.0" prefWidth="907.0" />
+            <Text layoutX="545.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCANNEZ" wrappingWidth="133.51513671875">
+               <font>
+                  <Font name="Arial" size="23.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="78.0" fitWidth="83.0" layoutX="573.0" layoutY="171.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/fleche-vers-le-bas.gif" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
+            </ImageView>         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

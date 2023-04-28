@@ -1,0 +1,36 @@
+.MenuPrincipal {
+    -fx-graphic: url("img/maison.png");
+}
+
+.btn-save:hover {
+    -fx-cursor: hand;
+    -fx-border-color: #2196f3;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #FFF;
+    -fx-text-fill: #2196f3
+}
+
+.textfield-design{
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-border-color: #517ab5;
+    -fx-border-radius: 50px;
+    -fx-text-inner-color: #000;
+}
+
+.textfield-design2{
+    -fx-background-color: #FFF;
+    -fx-background-radius: 10px;
+    -fx-border-color: #FFF;
+    -fx-border-radius: 50px;
+    -fx-text-inner-color: #000;
+}
+
+
+.rounded-pane {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+}
