@@ -22,58 +22,58 @@
       </ImageView>
       <Pane layoutX="25.0" layoutY="119.0" prefHeight="427.0" prefWidth="299.0" style="-fx-background-color: #F5B7B1;">
          <children>
-            <MenuButton fx:id="servicebtn" layoutX="13.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" gestion service" textAlignment="CENTER" textFill="#ff3364">
+            <MenuButton fx:id="servicebtn" alignment="TOP_LEFT" layoutX="13.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" Gestion Service" textAlignment="CENTER" textFill="#ff3364">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
                <font>
-                  <Font name="Perpetua Titling MT Bold" size="15.0" />
+                  <Font size="17.0" />
                </font>
             </MenuButton>
-            <MenuButton fx:id="consultationbtn" layoutX="17.0" layoutY="73.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" gestion consultation" textFill="#ff3364">
+            <MenuButton fx:id="consultationbtn" alignment="TOP_LEFT" layoutX="17.0" layoutY="73.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" Gestion Consultation" textFill="#ff3364">
                <items>
                   <MenuItem mnemonicParsing="false" text="Action 1" />
                   <MenuItem mnemonicParsing="false" text="Action 2" />
                </items>
                <font>
-                  <Font name="Perpetua Titling MT Bold" size="15.0" />
+                  <Font size="17.0" />
                </font>
             </MenuButton>
-            <MenuButton fx:id="rdvbtn" layoutX="17.0" layoutY="131.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" gestion rendez-vous" textFill="#ff3364">
+            <MenuButton fx:id="rdvbtn" alignment="TOP_LEFT" layoutX="17.0" layoutY="134.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" Gestion Rendez-vous" textFill="#ff3364">
                <items>
                   <MenuItem mnemonicParsing="false" text="Action 1" />
                   <MenuItem mnemonicParsing="false" text="Action 2" />
                </items>
                <font>
-                  <Font name="Perpetua Titling MT Bold" size="15.0" />
+                  <Font size="17.0" />
                </font>
             </MenuButton>
-            <MenuButton fx:id="partenairebtn" layoutX="17.0" layoutY="309.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" gestion partenaire" textFill="#ff3364">
+            <MenuButton fx:id="partenairebtn" alignment="TOP_LEFT" layoutX="17.0" layoutY="309.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" Gestion Partenaire" textFill="#ff3364">
                <items>
                   <MenuItem mnemonicParsing="false" text="Action 1" />
                   <MenuItem mnemonicParsing="false" text="Action 2" />
                </items>
                <font>
-                  <Font name="Perpetua Titling MT Bold" size="15.0" />
+                  <Font size="17.0" />
                </font>
             </MenuButton>
-            <MenuButton fx:id="produitbtn" layoutX="17.0" layoutY="367.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" gestion produit" textFill="#ff3364">
+            <MenuButton fx:id="produitbtn" layoutX="17.0" layoutY="367.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="274.0" text=" Gestion Produit" textFill="#ff3364">
                <items>
                   <MenuItem mnemonicParsing="false" text="Action 1" />
                   <MenuItem mnemonicParsing="false" text="Action 2" />
                </items>
                <font>
-                  <Font name="Perpetua Titling MT Bold" size="15.0" />
+                  <Font size="17.0" />
                </font>
             </MenuButton>
-            <Button fx:id="offrebtn" layoutX="20.0" layoutY="252.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="268.0" text="Gestion Offre" textFill="#ff3364">
+            <Button fx:id="offrebtn" alignment="TOP_LEFT" layoutX="20.0" layoutY="252.0" mnemonicParsing="false" onAction="#redirectToAddOffre" prefHeight="25.0" prefWidth="268.0" text="Gestion Offre" textFill="#ff3364">
                <font>
-                  <Font name="Palatino Linotype" size="15.0" />
+                  <Font size="16.0" />
                </font></Button>
-            <Button fx:id="candidatbtn" layoutX="16.0" layoutY="198.0" mnemonicParsing="false" onAction="#redirectToAddOffre" prefHeight="25.0" prefWidth="268.0" text="Gestion candidat" textFill="#ff3364">
+            <Button fx:id="candidatbtn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="16.0" layoutY="198.0" mnemonicParsing="false" onAction="#redirectToAddCandidat" prefHeight="25.0" prefWidth="268.0" text="Gestion Candidat" textFill="#ff3364">
                <font>
-                  <Font name="Palatino Linotype" size="15.0" />
+                  <Font size="17.0" />
                </font>
             </Button>
          </children>
@@ -96,11 +96,6 @@
          </image>
       </ImageView>
       <Label layoutX="424.0" layoutY="39.0" text="Language" />
-      <MenuButton fx:id="langSelect" layoutX="491.0" layoutY="35.0" mnemonicParsing="false" text="English">
-        <items>
-          <MenuItem mnemonicParsing="false" text="English" />
-          <MenuItem mnemonicParsing="false" text="Français" />
-        </items>
-      </MenuButton>
+      <Button fx:id="langSelect" layoutX="490.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchLang" prefHeight="25.0" prefWidth="70.0" text="English" />
    </children>
 </AnchorPane>

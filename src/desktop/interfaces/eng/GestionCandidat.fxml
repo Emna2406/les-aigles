@@ -18,30 +18,30 @@
             <Font name="Arial Black" size="23.0" />
          </font>
       </Text>
-      <Text layoutX="43.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
-      <Text layoutX="40.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom" />
+      <Text layoutX="36.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" wrappingWidth="71.0" />
+      <Text layoutX="40.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
       <Text layoutX="42.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
       <TextField fx:id="nomField" layoutX="28.0" layoutY="107.0" />
       <TextField fx:id="prenomField" layoutX="28.0" layoutY="170.0" />
       <TextField fx:id="emailField" layoutX="28.0" layoutY="239.0" />
       <Pane layoutX="394.0" layoutY="22.0" prefHeight="239.0" prefWidth="218.0" style="-fx-background-color: #ff3364;">
          <children>
-            <Button layoutX="38.0" layoutY="26.0" mnemonicParsing="false" onAction="#redirectToHomePage" prefHeight="25.0" prefWidth="121.0" text="Menu principal" />
-            <Button fx:id="btnupdate" layoutX="63.0" layoutY="126.0" mnemonicParsing="false" onAction="#updateCandidat" prefHeight="32.0" prefWidth="71.0" text="Modifier" />
-            <Button fx:id="btndelete" layoutX="64.0" layoutY="182.0" mnemonicParsing="false" onAction="#deleteCandidat" prefHeight="32.0" prefWidth="78.0" text="Supprimer" />
-            <Button fx:id="btnadd" layoutX="63.0" layoutY="81.0" mnemonicParsing="false" onAction="#addCandidat" prefHeight="32.0" prefWidth="71.0" text="Ajouter" />
+            <Button layoutX="38.0" layoutY="26.0" mnemonicParsing="false" onAction="#redirectToHomePage" prefHeight="25.0" prefWidth="121.0" text="Menu" />
+            <Button fx:id="btnupdate" alignment="TOP_LEFT" layoutX="63.0" layoutY="126.0" mnemonicParsing="false" onAction="#updateCandidat" prefHeight="32.0" prefWidth="71.0" text="Update" />
+            <Button fx:id="btndelete" alignment="TOP_LEFT" layoutX="64.0" layoutY="182.0" mnemonicParsing="false" onAction="#deleteCandidat" prefHeight="32.0" prefWidth="78.0" text="Delete" />
+            <Button fx:id="btnadd" alignment="TOP_LEFT" layoutX="63.0" layoutY="81.0" mnemonicParsing="false" onAction="#addCandidat" prefHeight="32.0" prefWidth="71.0" text="Add" />
          </children>
       </Pane>
       <TableView fx:id="candidatTable" layoutX="28.0" layoutY="267.0" prefHeight="168.0" prefWidth="611.0">
         <columns>
           <TableColumn fx:id="idcCol" prefWidth="160.0" text="Id" />
-          <TableColumn fx:id="nomCol" prefWidth="206.0" text="Nom" />
-            <TableColumn fx:id="prenomCol" prefWidth="84.0" text="Prenom" />
+          <TableColumn fx:id="nomCol" prefWidth="206.0" text="First Name" />
+            <TableColumn fx:id="prenomCol" prefWidth="84.0" text="Name" />
             <TableColumn fx:id="emailCol" prefWidth="75.0" text="Email" />
         </columns>
       </TableView>
       <Separator layoutX="288.0" layoutY="50.0" orientation="VERTICAL" prefHeight="200.0" />
       <Button fx:id="btnCv" layoutX="215.0" layoutY="158.0" mnemonicParsing="false" onAction="#uploadbtn" prefHeight="25.0" prefWidth="71.0" text="CV" />
-      <Label fx:id="fileLbl" layoutX="199.0" layoutY="200.0" prefHeight="17.0" prefWidth="121.0" text="Pas de fichier sélectionné" />
+      <Label fx:id="fileLbl" layoutX="199.0" layoutY="200.0" prefHeight="17.0" prefWidth="121.0" text="Must upload file" />
    </children>
 </AnchorPane>

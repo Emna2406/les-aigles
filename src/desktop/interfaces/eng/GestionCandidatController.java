@@ -114,6 +114,8 @@ public class GestionCandidatController implements Initializable {
         });
 
     }
+    
+    
 
     public void refreshList() {
         data.clear();
@@ -177,7 +179,8 @@ public class GestionCandidatController implements Initializable {
             alert.show();
             
         }
-        MailAPI.sendMail("nouha.ouertani@esprit.tn", "candidat Ajouté", "Bravo, un candidat a été ajouté avec succés! ");
+       String message = "Bravo, le candidat " + nom + " " + prenom + " a été ajouté avec succès.";
+                MailAPI.sendMail("nouha.ouertani@esprit.tn", "Candidat Ajouté", message);
             } catch (MessagingException ex) {
                 Logger.getLogger(GestionCandidatController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -208,7 +211,9 @@ public class GestionCandidatController implements Initializable {
     @FXML
     private void redirectToHomePage(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+            String path = "/desktop/interfaces/";
+            Parent root = FXMLLoader.load(getClass().getResource("/desktop/interfaces/Home.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("GestionCandidat.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -17,29 +18,32 @@
             <Font name="Perpetua Titling MT Bold" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="19.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nbr-places" />
+      <Text layoutX="19.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="number of places" />
       <Text layoutX="199.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
       <Text layoutX="142.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID-service" />
       <TextField fx:id="descField" layoutX="199.0" layoutY="102.0" />
       <Separator layoutX="359.0" layoutY="43.0" orientation="VERTICAL" prefHeight="200.0" />
-      <Pane layoutX="384.0" layoutY="43.0" prefHeight="216.0" prefWidth="200.0" style="-fx-background-color: #ff3364;">
+      <Pane layoutX="376.0" layoutY="24.0" prefHeight="216.0" prefWidth="200.0" style="-fx-background-color: #ff3364;">
          <children>
-            <Button layoutX="27.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Menu principal" />
-            <Button fx:id="Addbtn" layoutX="55.0" layoutY="63.0" mnemonicParsing="false" onAction="#AddEntity" prefHeight="25.0" prefWidth="71.0" text="Ajouter" />
-            <Button fx:id="updatebtn" layoutX="55.0" layoutY="117.0" mnemonicParsing="false" onAction="#updateEntity" prefHeight="25.0" prefWidth="71.0" text="Modifier" />
-            <Button fx:id="deletebtn" layoutX="57.0" layoutY="165.0" mnemonicParsing="false" onAction="#deleteEntity" text="Supprimer" />
+            <Button layoutX="27.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="principal menu" />
+            <Button fx:id="Addbtn" layoutX="55.0" layoutY="63.0" mnemonicParsing="false" onAction="#AddEntity" prefHeight="25.0" prefWidth="71.0" text="Add" />
+            <Button fx:id="updatebtn" layoutX="55.0" layoutY="117.0" mnemonicParsing="false" onAction="#updateEntity" prefHeight="25.0" prefWidth="71.0" text="Update" />
+            <Button fx:id="deletebtn" layoutX="57.0" layoutY="165.0" mnemonicParsing="false" onAction="#deleteEntity" text="Delete" />
          </children>
       </Pane>
-      <TableView fx:id="offreTab" layoutX="19.0" layoutY="276.0" prefHeight="188.0" prefWidth="552.0">
+      <TableView fx:id="offreTab" layoutX="19.0" layoutY="276.0" prefHeight="188.0" prefWidth="495.0">
         <columns>
-          <TableColumn fx:id="descriptionCol" prefWidth="267.0" text="Description" />
-          <TableColumn fx:id="nbrCol" prefWidth="117.0" text="Nbr-places" />
-            <TableColumn fx:id="serviceCol" prefWidth="167.0" text="ID-service" />
+          <TableColumn fx:id="descriptionCol" prefWidth="218.0" text="Description" />
+          <TableColumn fx:id="nbrCol" prefWidth="134.0" text="Nbr-places" />
+            <TableColumn fx:id="serviceCol" prefWidth="140.0" text="ID-service" />
         </columns>
       </TableView>
       <TextField fx:id="TfService" layoutX="125.0" layoutY="182.0" />
       <TextField fx:id="TfNbr_places" layoutX="19.0" layoutY="102.0" />
-      <Button layoutX="20.0" layoutY="243.0" mnemonicParsing="false" onAction="#refreshList1" text="Refrech" />
-      <Button fx:id="detailBtn" layoutX="108.0" layoutY="243.0" mnemonicParsing="false" onAction="#plusDetail" text="Plus de details" />
+      <Button layoutX="20.0" layoutY="31.0" mnemonicParsing="false" onAction="#refreshList1" text="Refrech" />
+      <Button fx:id="detailBtn" layoutX="20.0" layoutY="243.0" mnemonicParsing="false" onAction="#plusDetail" text="More details" />
+      <TextField fx:id="search" layoutX="401.0" layoutY="243.0" promptText="entrer des mots clès " />
+      <Label layoutX="350.0" layoutY="247.0" text="search" />
+      <Button fx:id="Exporter" layoutX="203.0" layoutY="243.0" mnemonicParsing="false" onAction="#Exporter" text="Export" />
    </children>
 </AnchorPane>

@@ -21,14 +21,15 @@ import javafx.stage.Stage;
 public class Home extends Application {
     
     public static Offre of;
+    public static int lang = 1;
     
     @Override
     public void start(Stage primaryStage) {
         
         try {
-          //  Parent root = FXMLLoader.load(getClass().getResource("desktop/interfaces/eng/GestionOffre.fxml"));
+           //Parent root = FXMLLoader.load(getClass().getResource("desktop/interfaces/eng/GestionOffre.fxml"));
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/desktop/interfaces/Home.fxml"));
+            loader.setLocation(getClass().getResource("/desktop/interfaces/eng/GestionOffre.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             

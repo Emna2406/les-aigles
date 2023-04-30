@@ -10,7 +10,9 @@ import desktop.interfaces.Home;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 
 /**
@@ -21,7 +23,7 @@ import javafx.scene.control.Label;
 
 
 public class DetailOffreController implements Initializable {
-
+ 
     
     @FXML
     Label title;
@@ -32,6 +34,10 @@ public class DetailOffreController implements Initializable {
     @FXML
     Label descri;
 
+    
+    
+    
+ 
     /**
      * Initializes the controller class.
      */
@@ -43,6 +49,10 @@ public class DetailOffreController implements Initializable {
        nbrPlaces.setText(Home.of.getNbrplacesS());
        idService.setText(Home.of.getIdserviceS());
        descri.setText(Home.of.getDescription());
-    }    
-    
+       
+       
+       
+           
+   
+    }
 }

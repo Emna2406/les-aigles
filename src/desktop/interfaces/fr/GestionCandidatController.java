@@ -114,6 +114,7 @@ public class GestionCandidatController implements Initializable {
         });
 
     }
+    
 
     public void refreshList() {
         data.clear();
@@ -207,14 +208,16 @@ public class GestionCandidatController implements Initializable {
 
     @FXML
     private void redirectToHomePage(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        try { 
+            String path = "/desktop/interfaces/";
+            Parent root = FXMLLoader.load(getClass().getResource("../desktop/interfaces/Home.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("GestionCandidat.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage() + ex.getStackTrace());
+            System.out.println(ex.getMessage());
         }
     }
 

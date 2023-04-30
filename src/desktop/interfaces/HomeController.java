@@ -44,7 +44,7 @@ public class HomeController  {
     @FXML
     private Button decbtn;
     @FXML
-    private MenuButton langSelect;
+    private Button langSelect;
 
     /*   @FXML
     EventHandler<ActionEvent> e = new EventHandler<ActionEvent>()
@@ -57,13 +57,19 @@ public class HomeController  {
     
     @FXML  
     public void initialize(URL url, ResourceBundle rb) {
-        langSelect.setText("fr");
     }    
 
     @FXML
     private void redirectToAddOffre(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("GestionCandidat.fxml"));
+            
+            String path = "/desktop/interfaces/";
+        	if(Home.lang == 1)
+        		path += "eng/";
+        	else
+        		path += "fr/";
+            Parent root = FXMLLoader.load(getClass().getResource(path + "GestionOffre.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("GestionCandidat.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -73,4 +79,41 @@ public class HomeController  {
         }
     }
     
+    @FXML
+    private void redirectToAddCandidat(ActionEvent event) {
+        try {
+            
+            String path = "/desktop/interfaces/";
+        	if(Home.lang == 1)
+        		path += "eng/";
+        	else
+        		path += "fr/";
+            Parent root = FXMLLoader.load(getClass().getResource(path + "GestionCandidat.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("GestionCandidat.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    
+    
+    public void switchLang()
+    {
+    	if(Home.lang == 1)
+    	{
+    		Home.lang = 2;
+    		langSelect.setText("Français");
+    	}
+    	else
+    	{
+    		Home.lang = 1;
+    		langSelect.setText("English");
+                
+    	}
+    	
+    }
 }

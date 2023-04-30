@@ -31,9 +31,11 @@ import desktop.services.OffreCRUD;
 import desktop.tools.MailAPI;
 import java.awt.Desktop;
 import java.awt.Font;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -59,6 +61,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.mail.MessagingException;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -69,12 +72,9 @@ public class GestionOffreController implements Initializable {
 
     @FXML
     private TextField descField;
-    @FXML
     private TextField serviceField;
     @FXML
     private TextField TfNbr_places;
-    @FXML
-    private Button detailbtn;
 
     private ObservableList<Offre> offreList;
 
@@ -96,6 +96,16 @@ public class GestionOffreController implements Initializable {
     private TableView<Offre> offreTab;
     @FXML
     private TableColumn<Offre, String> descriptionCol;
+    @FXML
+    private Button Addbtn;
+    @FXML
+    private TextField TfService;
+    @FXML
+    private Button detailBtn;
+    @FXML
+    private TextField search;
+    @FXML
+    private Button Exporter;
 
     /**
      * Initializes the controller class.
@@ -111,6 +121,33 @@ public class GestionOffreController implements Initializable {
       //  voirPlusBtn.setCellValueFactory(new PropertyValueFactory<>("plusBtn"));
 
         offreTab.setItems(data);
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue != null && (newValue.length() < oldValue.length())) {
+                offreTab.setItems(data);
+            }
+            String value = newValue.toLowerCase();
+            ObservableList<Offre> subentries = FXCollections.observableArrayList();
+            for (Offre entry : offreTab.getItems()) {
+                boolean match = true;
+                
+                String description = entry.getDescription();
+                
+
+                if (!description.toLowerCase().contains(value))
+                         {
+                    match = false;
+                }
+                if (match) {
+                    subentries.add(entry);
+                    
+                }
+                
+            } 
+             offreTab.setItems(data);
+                 });
+        
+         
+
 
         offreTab.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -118,9 +155,13 @@ public class GestionOffreController implements Initializable {
                 Home.of = of;
                 setBtn();
             }
+        
+             
+            
         });
-    }
-
+    
+    
+       }
     @FXML
     public void refreshList1() {
         data.clear();
@@ -134,7 +175,6 @@ public class GestionOffreController implements Initializable {
 
     }
 
-    @FXML
     private void setBtn() {
         if (of == null) {
             updatebtn.setDisable(true);
@@ -228,7 +268,6 @@ public class GestionOffreController implements Initializable {
         }
     }
 
-    @FXML
     private void redirectToHomePage(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
@@ -238,6 +277,52 @@ public class GestionOffreController implements Initializable {
             stage.show();
         } catch (IOException ex) {
             System.out.println(ex.getMessage() + ex.getStackTrace());
+        }
+    }
+    
+    private String getPath() {
+        String userHome = System.getProperty("user.home");
+        String fileSeparator = System.getProperty("file.separator");
+        String documentsPath = userHome + fileSeparator + "Documents";
+        System.out.println("User's documents path: " + documentsPath);
+        return documentsPath;
+    }
+
+    @FXML
+    private void Exporter(ActionEvent event) {
+         try {
+            //the file path
+//            File file = new File("C:\\Users\\user\\Desktop\\image\\file.csv");
+                        File file = new File(getPath() + "\\file.csv");
+
+            //if the file not exist create one
+            if (!file.exists()) {
+                file.createNewFile();
+            } else {
+                file.delete();
+            }
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write("description;Nbr-places;ID-service;");
+            bw.newLine();
+            //loop for jtable rows
+            for (int i = 0; i < offreTab.getItems().size(); i++) {
+                //loop for jtable column
+                for (int j = 0; j < offreTab.getColumns().size(); j++) {
+                    bw.write(offreTab.getColumns().get(j).getCellData(i) + ";");
+                }
+                bw.newLine();
+            }
+            //close BufferedWriter
+            bw.close();
+            //close FileWriter 
+            fw.close();
+            JOptionPane.showMessageDialog(null, "Data Exported");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
     
