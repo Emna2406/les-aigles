@@ -10,7 +10,7 @@ package desktop.entities;
  * @author USER
  */
 public class Offre {
-    private int id;
+    private int id=9;
     private int nbrplaces;
     private String description;
     private int idservice;
@@ -18,7 +18,7 @@ public class Offre {
     public Offre() {
     }
         public Offre(int id, int nbrplaces, String description, int idservice) {
-        this.id = id;
+        this.id ++;
         this.nbrplaces = nbrplaces;
         this.description = description;
         this.idservice = idservice;
@@ -31,7 +31,7 @@ public class Offre {
     }
 
     public Offre(String description, int nbrplaces, int idService) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 

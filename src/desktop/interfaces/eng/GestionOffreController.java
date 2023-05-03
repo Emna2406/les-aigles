@@ -121,7 +121,7 @@ public class GestionOffreController implements Initializable {
       //  voirPlusBtn.setCellValueFactory(new PropertyValueFactory<>("plusBtn"));
 
         offreTab.setItems(data);
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
+      /*  search.textProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue != null && (newValue.length() < oldValue.length())) {
                 offreTab.setItems(data);
             }
@@ -144,7 +144,7 @@ public class GestionOffreController implements Initializable {
                 
             } 
              offreTab.setItems(data);
-                 });
+                 });*/
         
          
 
@@ -211,7 +211,7 @@ public class GestionOffreController implements Initializable {
             alert.setHeaderText(null);
             alert.showAndWait();
         } else {
-            Offre offre = new Offre(description, nbrplaces, idService);
+            Offre offre = new Offre(nbrplaces, description, idService);
             pc.AddEntity(of);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");

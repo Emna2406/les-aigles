@@ -32,17 +32,17 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
      * @param p
      */
     
-     public void AddEntity(Candidat p, File f) {
+     public void AddEntity(Candidat p) {
         try {
-            String requete1 = "INSERT INTO candidat (id,nom,prenom,cv,email) VALUES(?,?,?,?,?)";
+            String requete1 = "INSERT INTO candidat (id,nom,prenom,email) VALUES(?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete1);
             pst.setInt(1, p.getIdCand());
             pst.setString(2, p.getNom());
              pst.setString(3, p.getPrenom());
              
-             FileReader fr = new FileReader(f);
-             pst.setCharacterStream(4, fr, (int)f.length());
-            pst.setString(5, p.getEmail());
+            //FileReader fr = new FileReader(f);
+           // pst.setCharacterStream(4, fr, (int)f.length());
+            pst.setString(4, p.getEmail());
             pst.executeUpdate();
             System.out.println("Bravo candidat ajouté !");
             
@@ -51,7 +51,7 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
         }
     }
      
-/*     public void addCv(File f)
+  /* public void addCv(File f)
      {
          try {
             FileReader fr = new FileReader(f);
@@ -107,7 +107,7 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
         
     }
 
-    public ObservableList<Candidat> SearchPart(String entry) {
+    public ObservableList<Candidat> rechercher(String entry) {
         ObservableList<Candidat> myList = FXCollections.observableArrayList();
         try {
             
@@ -121,7 +121,7 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
             
             while (rs.next()) {
                 Candidat rec = new Candidat();
-                rec.setIdCand(rs.getInt("idCand"));
+                rec.setIdCand(rs.getInt("id"));
                 rec.setNom(rs.getString("nom"));
                 rec.setPrenom(rs.getString("prenom"));
                 rec.setEmail(rs.getString("email"));
@@ -183,10 +183,5 @@ public class CandidatCRUD implements EntityCRUD<Candidat> {
     
 return myList;
 }
-
-    @Override
-    public void AddEntity(Candidat t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

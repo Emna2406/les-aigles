@@ -36,6 +36,17 @@ public class Candidat {
         this.email = email;
     }
 
+   /* public Candidat(String john_Doe, String johndoeexamplecom) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
+
+    public Candidat(int idCand, String nom, String email, String CV) {
+        this.idCand = idCand;
+        this.nom = nom;
+        this.email = email;
+        this.CV = CV;
+    }
+
     
 
     public int getIdCand() {

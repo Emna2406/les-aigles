@@ -16,17 +16,28 @@ public class main {
     public static void main(String[] args) {
         MyConnection mc =MyConnection.getInstance();
         // Instantiate OffreCRUD
-        OffreCRUD offreCRUD = new OffreCRUD();
+        CandidatCRUD candidatCRUD = new CandidatCRUD();
         
-        // Add a new Offre
-     //   Offre offre = new Offre("offre", "john.doe@example.com");
-      //  offreCRUD.AddEntity(offre);
-        
-        // Display all Offres
-        List<Offre> offres = offreCRUD.display();
-        for (Offre p : offres) {
-            System.out.println(p.getId() + " - " + p.getDescription() + " - " + p.getNbrplaces()+ " - " + p.getIdservice());
+        /*Candidat o = new Candidat(5, "yeshdj", "hakfhj", "hejfkze@gmail.com", null, 2);
+        candidatCRUD.AddEntity(o);*/
+        // Add a new Partenaire
+        Candidat candidat = new Candidat(9,"ahmed", "hjjf","yeser@gmail.com");
+        candidatCRUD.AddEntity(candidat);
+         //Display all Partenaires
+        List<Candidat> candidats = candidatCRUD.display();
+        for (Candidat p : candidats) {
+            System.out.println(p.getIdCand()+ " - " + p.getNom() + " - " + p.getEmail());
         }
     }
-}
+        // Add a new Offre
+      //Offre offre = new Offre("offre", "john.doe@example.com");
+        //offreCRUD.AddEntity(offre);
+        
+        // Display all Offres
+       // List<Offre> offres = offreCRUD.display();
+        //for (Offre p : offres) {
+           //System.out.println(p.getId() + " - " + p.getDescription() + " - " + p.getNbrplaces()+ " - " + p.getIdservice());
+       // }
+    }
+
 

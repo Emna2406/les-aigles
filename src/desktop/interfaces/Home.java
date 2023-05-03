@@ -29,7 +29,7 @@ public class Home extends Application {
         try {
            //Parent root = FXMLLoader.load(getClass().getResource("desktop/interfaces/eng/GestionOffre.fxml"));
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/desktop/interfaces/eng/GestionOffre.fxml"));
+            loader.setLocation(getClass().getResource("/desktop/interfaces/eng/GestionCandidat.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             

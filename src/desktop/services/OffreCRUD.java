@@ -10,6 +10,7 @@ import desktop.entities.Candidat;
 import desktop.entities.Offre;
 import desktop.interfaces.EntityCRUD;
 import desktop.tools.MyConnection;
+import java.io.FileReader;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,18 +34,21 @@ public class OffreCRUD implements EntityCRUD<Offre> {
     @Override
     public void AddEntity(Offre o) {
         try {
-            String requete1 = "INSERT INTO offre (nbrplaces,idservice,description) VALUES(?,?,?)";
+            String requete1 = "INSERT INTO offre (id,nbrplaces,idservice,description) VALUES(?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete1);
+            pst.setInt(1, o.getId());
             pst.setInt(2, o.getIdservice());
-            pst.setInt(1, o.getNbrplaces());
-            pst.setString(3, o.getDescription());
+            pst.setInt(3, o.getNbrplaces());
+            pst.setString(4, o.getDescription());
+           
+ 
 
             pst.executeUpdate();
             System.out.println("Bravo offre ajouté !");
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("test");
+            /*System.out.println("test");*/
         }
     }
     
