@@ -1,0 +1,32 @@
+{% block body %}
+ <h1 align = "centre" > Liste des Services </h1>
+
+                    <table border="1">
+                        <thead>
+                        <tr>
+                            <td>nom patient </td>
+                            <td>nom medecin </td>
+                            <td>date debut</td>
+                            <td>date fin</td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ce in listpdf %}
+                            <tr>
+                                 <td>{{ce.patient.nom}}</td>
+                                 <td>{{ce.medecin.nom}}</td>
+                                 <td>{{ce.Datedeb|date}} </td>
+                                 <td>{{ce.datefin|date}} </td>
+                               
+
+                            </tr>
+                        {% endfor %}
+
+
+
+
+
+                        </tbody>
+
+{% endblock %}

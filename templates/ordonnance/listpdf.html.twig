@@ -1,0 +1,63 @@
+
+{% block body %}
+<h4 align = "right" > our logo and image </h1>
+<table align="right">
+{% for Ordonnance in listpdf %}
+<tr>
+  <td> 
+   <img src="{{ asset('assets/'~Ordonnance.image) }}" height="50" width="50">
+   </td>
+</tr>
+ {% endfor %}
+</table>
+ <h1 align = "centre" > Liste des Ordonnances </h1>
+
+                    <table border="1">
+                    
+                        <thead>
+                        <tr>
+                            <td> </td>
+                            <td>Nom Medecin </td>
+                            
+                             <td>Nom Patient</td>
+                            <td>Date</td>
+                            <td>description</td>
+
+                        </tr>
+                       </thead>
+                        
+                       
+                        <tbody>
+                        {% for Ordonnance in listpdf %}
+                            <tr>
+                                
+
+                                       <td> 
+   <img src="{{ asset('assets/'~Ordonnance.image) }}" height="200" width="200">
+   </td>
+
+<td>{{ Ordonnance.consultation.medecin.nom}}</td>
+  <td>{{ Ordonnance.consultation.patient.nom}}</td>
+   <td>{{Ordonnance.date|date}} </td>
+    <td>{{Ordonnance.description}} </td>
+
+                            </tr>
+                        {% endfor %}
+</table>
+
+<h4 align = "centre" > all signature of doctors </h1>
+<table>
+{% for Ordonnance in listpdf %}
+<tr>
+  <td> 
+  <p> les signatures : </p>
+   <td>{{ Ordonnance.consultation.medecin.nom}}</td>
+   </td>
+</tr>
+ {% endfor %}
+</table>
+
+
+                        </tbody>
+
+{% endblock %}

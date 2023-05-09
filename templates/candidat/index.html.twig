@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat{% endblock %}
+{% block body %}
+    
+<h1>Candidat</h1>
+
+  <table class="table" style="width:96%;text-align:center;align-self:center;vertical-align:middle;">
+        <thead>
+            <tr>
+                <th>IdCand</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>CV</th>
+                 <th>IdService</th>
+                <th colspan="2">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+         
+        {% for candidat in candidats %}
+            <tr>
+                <td>{{ candidat.idCand }}</td>
+                <td>{{ candidat.nom }}</td>
+                <td>{{ candidat.prenom }}</td>
+                <td>{{ candidat.email }}</td>
+                <td>{{ candidat.cv }}</td>
+                <td>{{ candidat.IdService }}</td>
+                  <td>
+								
+						
+                    </td>
+                    <td>
+                        
+                            {{ include('candidat/_delete_form.html.twig') }}
+						<td>
+                        
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+   
+
+
+</br>
+</br>
+</br>
+</br>
+</br>
+{% endblock %}
+
+

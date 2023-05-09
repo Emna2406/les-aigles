@@ -1,0 +1,43 @@
+{# templates/email/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Send an email</h1>
+
+    {% if app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ app.flashes('success')[0] }}
+        </div>
+    {% endif %}
+
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.from) }}
+        {{ form_widget(form.from, { 'attr': { 'class': 'form-control' } }) }}
+        {{ form_errors(form.from) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.to) }}
+        {{ form_widget(form.to, { 'attr': { 'class': 'form-control' } }) }}
+        {{ form_errors(form.to) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.subject) }}
+        {{ form_widget(form.subject, { 'attr': { 'class': 'form-control' } }) }}
+        {{ form_errors(form.subject) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.message) }}
+        {{ form_widget(form.message, { 'attr': { 'class': 'form-control' } }) }}
+        {{ form_errors(form.message) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send</button>
+
+    {{ form_end(form) }}
+{% endblock %}
