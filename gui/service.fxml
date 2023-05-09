@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="636.0" prefWidth="1261.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.ServiceController">
+   <children>
+      <ImageView fitHeight="575.0" fitWidth="1006.0" layoutX="258.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/flat-lay-health-still-life-arrangement-with-copy-space%20-%20Copie%20(1).jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0285f8" height="200.0" layoutX="24.0" layoutY="430.0" opacity="0.25" stroke="BLACK" strokeType="INSIDE" width="205.0" />
+      <TextField fx:id="nom" layoutX="34.0" layoutY="241.0" onKeyPressed="#nomvalid" />
+      <TextField fx:id="description" layoutX="34.0" layoutY="341.0" onKeyPressed="#desvalid" />
+      <Label layoutX="19.0" layoutY="194.0" text="nom" />
+      <Label layoutX="15.0" layoutY="298.0" text="description" />
+      <TableView fx:id="tab_service" layoutX="639.0" layoutY="141.0" onMouseClicked="#yosr" prefHeight="400.0" prefWidth="602.0">
+        <columns>
+          <TableColumn fx:id="col_nom" minWidth="20.0" prefWidth="150.0" text="nom" />
+          <TableColumn fx:id="col_descri" prefWidth="150.0" text="description" />
+            <TableColumn fx:id="col_image" prefWidth="150.0" text="image" />
+            <TableColumn fx:id="col_id" prefWidth="150.0" text="id" />
+        </columns>
+      </TableView>
+      <Button fx:id="modifser" alignment="BASELINE_LEFT" layoutX="59.0" layoutY="494.0" mnemonicParsing="false" onAction="#modifierservice" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #fdfefe;" text="modifier" />
+      <Button fx:id="suppser" alignment="BASELINE_LEFT" layoutX="59.0" layoutY="533.0" mnemonicParsing="false" onAction="#supprimerservice" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #fdfefe;" text="supprimer" />
+      <RadioButton fx:id="radiomodif" layoutX="686.0" layoutY="31.0" mnemonicParsing="false" onAction="#modifcheck" onMouseClicked="#yosr" text="Modifier " />
+      <Label layoutX="21.0" layoutY="183.0" opacity="0.0" text="id" />
+      <TextField fx:id="id" layoutX="102.0" layoutY="178.0" opacity="0.0" />
+      <Label fx:id="errornom" layoutX="144.0" layoutY="209.0" />
+      <Label fx:id="errordes" layoutX="137.0" layoutY="261.0" />
+      <TextField fx:id="image" layoutX="102.0" layoutY="325.0" opacity="0.0" />
+      <RadioButton fx:id="radioconsult" layoutX="797.0" layoutY="31.0" mnemonicParsing="false" onAction="#consultcheck" text="Consulter" />
+      <RadioButton fx:id="radiosupp" layoutX="899.0" layoutY="31.0" mnemonicParsing="false" onAction="#suppcheck" text="Supprimer" />
+      <Label fx:id="labser" layoutX="60.0" layoutY="82.0" prefHeight="21.0" prefWidth="154.0" text="Services" textFill="#e42d2d">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="radioajout" layoutX="587.0" layoutY="31.0" mnemonicParsing="false" onAction="#ajoutcheck" prefHeight="21.0" prefWidth="91.0" text="Ajouter" />
+      <Button fx:id="annulerser" alignment="BASELINE_LEFT" layoutX="59.0" layoutY="577.0" mnemonicParsing="false" onAction="#annulerser" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #fdfefe;" text="Annuler" />
+      <Button fx:id="btngotochambre" alignment="BASELINE_LEFT" layoutX="1042.0" layoutY="16.0" mnemonicParsing="false" onAction="#gotochambre" prefHeight="37.0" prefWidth="219.0" style="-fx-background-color: #fdfefe;" text=" Reservation">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <TextField fx:id="rechact" layoutX="278.0" layoutY="16.0" onAction="#rechercheractivite" promptText="rechercher" />
+      <ImageView fx:id="logo" fitHeight="137.0" fitWidth="248.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/logo.jpg" />
+         </image></ImageView>
+      <Button fx:id="ajoutser" alignment="BASELINE_LEFT" layoutX="58.0" layoutY="452.0" mnemonicParsing="false" onAction="#ajoutservice" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #fdfefe;" text="Ajouter" />
+      <Separator layoutY="59.0" prefHeight="5.0" prefWidth="1264.0" />
+      <Separator layoutX="251.0" orientation="VERTICAL" prefHeight="637.0" prefWidth="13.0" />
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="432.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/341683600_584250666816629_6772231891782456929_n.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="163.0" layoutY="458.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/add.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="163.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/refresh.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="163.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/trash.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="163.0" layoutY="583.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/cross.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

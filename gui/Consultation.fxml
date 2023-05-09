@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="723.0" prefWidth="1247.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.ConsultationController">
+   <children>
+      <ImageView fitHeight="655.0" fitWidth="1168.0" layoutX="311.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/flat-lay-health-still-life-arrangement-with-copy-space%20-%20Copie%20(1).jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0285f8" height="259.0" layoutX="47.0" layoutY="522.0" opacity="0.25" stroke="BLACK" strokeType="INSIDE" width="209.0" />
+      <Label layoutX="10.0" layoutY="202.0" prefHeight="21.0" prefWidth="89.0" text="id_patient :" textAlignment="RIGHT" />
+      <Label layoutX="13.0" layoutY="400.0" text="image :" />
+      <Label layoutX="5.0" layoutY="266.0" text="id_medecin :" />
+      <Label layoutX="15.0" layoutY="345.0" prefHeight="21.0" prefWidth="63.0" text="date :" />
+      <TableView fx:id="tablec" layoutX="870.0" layoutY="253.0" onMouseClicked="#med" prefHeight="364.0" prefWidth="573.0">
+        <columns>
+          <TableColumn fx:id="colpc" prefWidth="109.0" text="nom patient" />
+          <TableColumn fx:id="colmc" prefWidth="110.0" text="nom medecin" />
+            <TableColumn fx:id="coldc" prefWidth="141.0" text="date" />
+            <TableColumn fx:id="colimgc" prefWidth="153.0" text="image" />
+            <TableColumn fx:id="colidc" prefWidth="59.0" text="id" />
+        </columns>
+      </TableView>
+      <Label layoutX="17.0" layoutY="109.0" opacity="0.0" text="id :" />
+      <Button fx:id="ajoutc" layoutX="83.0" layoutY="541.0" mnemonicParsing="false" onAction="#ajoutcons" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #fdfefe#fdfefe;" text="Ajouter" />
+      <Button fx:id="annulec" layoutX="83.0" layoutY="720.0" mnemonicParsing="false" onAction="#annuler1" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #fdfefe#fdfefe;" text="Annuler" />
+      <Button fx:id="modifc" layoutX="83.0" layoutY="600.0" mnemonicParsing="false" onAction="#modifier" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #fdfefe#fdfefe;" text="Modifier" />
+      <Button fx:id="suppc" layoutX="83.0" layoutY="660.0" mnemonicParsing="false" onAction="#supprimer_rdv" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #fdfefe#fdfefe;" text="Supprimer" />
+      <TextField fx:id="idc" layoutX="134.0" layoutY="104.0" opacity="0.0" />
+      <TextField fx:id="imgc" layoutX="92.0" layoutY="421.0" prefHeight="71.0" prefWidth="109.0" />
+      <DatePicker fx:id="datec" layoutX="90.0" layoutY="340.0" />
+      <ComboBox fx:id="medecinc" layoutX="94.0" layoutY="266.0" prefHeight="31.0" prefWidth="209.0" />
+      <ComboBox fx:id="patientc" layoutX="94.0" layoutY="197.0" prefHeight="31.0" prefWidth="209.0" />
+      <RadioButton fx:id="rdc" layoutX="324.0" layoutY="120.0" mnemonicParsing="false" onAction="#checkajouter1" text="ajouter" />
+      <RadioButton fx:id="mdc" layoutX="417.0" layoutY="120.0" mnemonicParsing="false" onAction="#checkmodif1" text="modifier" />
+      <RadioButton fx:id="sdc" layoutX="521.0" layoutY="120.0" mnemonicParsing="false" onAction="#checksuppr1" text="supprimer" />
+      <Label fx:id="label2" layoutX="16.0" layoutY="39.0" prefHeight="21.0" prefWidth="77.0" />
+      <Button layoutX="1352.0" layoutY="24.0" mnemonicParsing="false" onAction="#Jump" style="-fx-background-color: #000000;" text=" Ordonnance" textFill="#fdfefe" />
+      <Label layoutX="79.0" layoutY="113.0" text="Consultation" textFill="#e42973">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="1245.0" layoutY="655.0" mnemonicParsing="false" onAction="#gotostat" prefHeight="44.0" prefWidth="89.0" style="-fx-background-color: #000000;" text="STAT" textFill="#fdfefe" />
+      <Button layoutX="1094.0" layoutY="656.0" mnemonicParsing="false" onAction="#jumpii" prefHeight="44.0" prefWidth="126.0" style="-fx-background-color: #000000;" text="Envoyer un Mail" textFill="#fdfefe" />
+      <Button fx:id="smis" focusTraversable="false" layoutX="1352.0" layoutY="656.0" mnemonicParsing="false" onAction="#gotosms" prefHeight="44.0" prefWidth="89.0" style="-fx-background-color: #000000;" text="SMS" textFill="#fdfefe" />
+      <TextField fx:id="ttrech" layoutX="334.0" layoutY="45.0" onAction="#recherche" promptText="rechercher" />
+      <ImageView fitHeight="81.0" fitWidth="310.0" layoutX="1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/logo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="27.0" layoutX="490.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/341683600_584250666816629_6772231891782456929_n.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="314.0" layoutY="165.0" prefHeight="3.0" prefWidth="1165.0" />
+      <Separator layoutX="304.0" orientation="VERTICAL" prefHeight="731.0" prefWidth="20.0" />
+      <Separator layoutX="-4.0" layoutY="79.0" prefHeight="21.0" prefWidth="1490.0" />
+   </children>
+</AnchorPane>

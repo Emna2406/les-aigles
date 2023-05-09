@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package desktop.entities;
-
+package edu.connexion3a41.entities;
 /**
  *
  * @author USER
@@ -34,6 +33,17 @@ public class Candidat {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+    }
+
+   /* public Candidat(String john_Doe, String johndoeexamplecom) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
+
+    public Candidat(int idCand, String nom, String email, String CV) {
+        this.idCand = idCand;
+        this.nom = nom;
+        this.email = email;
+        this.CV = CV;
     }
 
     

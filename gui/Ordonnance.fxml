@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="782.0" prefWidth="1468.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.connexion3a41.gui.OrdonnanceController">
+   <children>
+      <ImageView fitHeight="686.0" fitWidth="1141.0" layoutX="327.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/flat-lay-health-still-life-arrangement-with-copy-space%20-%20Copie.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0285f8" height="255.0" layoutX="62.0" layoutY="521.0" opacity="0.25" stroke="BLACK" strokeType="INSIDE" width="229.0" />
+      <Label layoutX="36.0" layoutY="76.0" opacity="0.0" text="id :" />
+      <Label layoutX="12.0" layoutY="223.0" text="consul_id :" />
+      <Label layoutX="28.0" layoutY="272.0" text="date :" />
+      <Label layoutX="16.0" layoutY="329.0" text="description :" />
+      <Label layoutX="22.0" layoutY="379.0" text="image :" />
+      <TextField fx:id="ido" layoutX="105.0" layoutY="71.0" opacity="0.0" />
+      <TextField fx:id="desco" layoutX="99.0" layoutY="324.0" onKeyReleased="#testchaine" prefHeight="31.0" prefWidth="193.0" />
+      <TextField fx:id="imgo" layoutX="103.0" layoutY="400.0" prefHeight="101.0" prefWidth="160.0" />
+      <TableView fx:id="tableo" layoutX="761.0" layoutY="200.0" onMouseClicked="#med" prefHeight="391.0" prefWidth="672.0">
+        <columns>
+          <TableColumn fx:id="colidco" prefWidth="102.0" text="id cons" />
+          <TableColumn fx:id="coldo" prefWidth="132.0" text="date" />
+            <TableColumn fx:id="coldeso" prefWidth="119.0" text="description" />
+            <TableColumn fx:id="colimgo" prefWidth="191.0" text="image" />
+            <TableColumn fx:id="colido" prefWidth="75.0" text="id" />
+        </columns>
+      </TableView>
+      <Button fx:id="ajto" alignment="BASELINE_LEFT" layoutX="113.0" layoutY="544.0" mnemonicParsing="false" onAction="#ajoutord" prefHeight="31.0" prefWidth="124.0" style="-fx-background-color: #FDFEFE;" text="Ajouter" />
+      <Button fx:id="anno" alignment="BASELINE_LEFT" layoutX="113.0" layoutY="715.0" mnemonicParsing="false" onAction="#annuler2" prefHeight="31.0" prefWidth="124.0" style="-fx-background-color: #FDFEFE;" text="Annuler" />
+      <Button fx:id="modo" alignment="BASELINE_LEFT" layoutX="113.0" layoutY="602.0" mnemonicParsing="false" onAction="#modifierord" prefHeight="31.0" prefWidth="124.0" style="-fx-background-color: #FDFEFE;" text="Modifier" />
+      <Button fx:id="suppo" alignment="BASELINE_LEFT" layoutX="113.0" layoutY="654.0" mnemonicParsing="false" onAction="#supprimer_ord" prefHeight="31.0" prefWidth="124.0" style="-fx-background-color: #FDFEFE;" text="Supprimer" />
+      <DatePicker fx:id="dateo" layoutX="97.0" layoutY="267.0" prefHeight="31.0" prefWidth="200.0" />
+      <ComboBox fx:id="conso" layoutX="97.0" layoutY="218.0" prefHeight="31.0" prefWidth="200.0" />
+      <Label fx:id="label3" layoutX="22.0" layoutY="16.0" prefHeight="21.0" prefWidth="69.0" />
+      <RadioButton fx:id="ado" layoutX="348.0" layoutY="102.0" mnemonicParsing="false" onAction="#checkajouter3" text="ajouter" />
+      <RadioButton fx:id="mdo" layoutX="460.0" layoutY="102.0" mnemonicParsing="false" onAction="#checkmodif3" text="modifier" />
+      <RadioButton fx:id="sdo" layoutX="560.0" layoutY="102.0" mnemonicParsing="false" onAction="#checksuppr3" text="supprimer" />
+      <Label fx:id="erreur3" layoutX="216.0" layoutY="339.0" />
+      <Button layoutX="1259.0" layoutY="39.0" mnemonicParsing="false" onAction="#jump1" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: #87CEEB;" text="Certificat" />
+      <Label alignment="TOP_CENTER" layoutX="62.0" layoutY="129.0" prefHeight="21.0" prefWidth="175.0" text="Ordonnance" textAlignment="CENTER" textFill="#e42973">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="trech" layoutX="361.0" layoutY="38.0" onAction="#recherche" prefHeight="31.0" prefWidth="175.0" promptText="rechercher" />
+      <ImageView fitHeight="101.0" fitWidth="304.0" layoutX="5.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/logo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="501.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/341683600_584250666816629_6772231891782456929_n.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="311.0" layoutY="2.0" orientation="VERTICAL" prefHeight="789.0" prefWidth="31.0" />
+      <Separator layoutY="79.0" prefHeight="3.0" prefWidth="1468.0" />
+      <Separator layoutX="327.0" layoutY="146.0" prefHeight="3.0" prefWidth="1044.0" />
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="206.0" layoutY="549.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/add.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="206.0" layoutY="608.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/refresh.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="206.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/trash.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="206.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Photo/cross.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
